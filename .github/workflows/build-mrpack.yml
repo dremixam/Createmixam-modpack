@@ -41,7 +41,7 @@ jobs:
         
         # Create the mrpack file (which is just a ZIP with .mrpack extension)
         cd mrpack-temp
-        zip -r "../Createmixam-modpack-${{ steps.version.outputs.VERSION }}.mrpack" *
+        zip -r "../Createmixam-${{ steps.version.outputs.VERSION }}.mrpack" *
         cd ..
         
         # Clean up temporary directory
@@ -50,7 +50,7 @@ jobs:
     - name: Upload mrpack as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Createmixam-modpack-${{ steps.version.outputs.VERSION }}
+        name: Createmixam-${{ steps.version.outputs.VERSION }}
         path: "*.mrpack"
         retention-days: 30
     
