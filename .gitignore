@@ -1,0 +1,34 @@
+# Build artifacts
+*.mrpack
+mrpack-temp/
+build-temp/
+
+# Development files
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Archives and compressed files (except the final mrpack)
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Local testing
+test-mrpack/
+local-build/
+
+# System files
+.env
+.env.local

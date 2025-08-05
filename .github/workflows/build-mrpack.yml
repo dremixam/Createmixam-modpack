@@ -1,0 +1,78 @@
+name: Build Mrpack
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Get version from tag or commit
+      id: version
+      run: |
+        if [[ $GITHUB_REF == refs/tags/* ]]; then
+          VERSION=${GITHUB_REF#refs/tags/}
+        else
+          VERSION="dev-$(echo $GITHUB_SHA | cut -c1-7)"
+        fi
+        echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+        echo "Building version: $VERSION"
+    
+    - name: Create mrpack file
+      run: |
+        # Create a temporary directory for the mrpack contents
+        mkdir -p mrpack-temp
+        
+        # Copy all necessary files to the temporary directory
+        cp modrinth.index.json mrpack-temp/
+        cp -r overrides mrpack-temp/
+        
+        # Create the mrpack file (which is just a ZIP with .mrpack extension)
+        cd mrpack-temp
+        zip -r "../Createmixam-modpack-${{ steps.version.outputs.VERSION }}.mrpack" *
+        cd ..
+        
+        # Clean up temporary directory
+        rm -rf mrpack-temp
+    
+    - name: Upload mrpack as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Createmixam-modpack-${{ steps.version.outputs.VERSION }}
+        path: "*.mrpack"
+        retention-days: 30
+    
+    - name: Create Release (if tag)
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: "*.mrpack"
+        generate_release_notes: true
+        draft: false
+        prerelease: ${{ contains(github.ref, '-') }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Generate build summary
+      run: |
+        echo "## Build Summary 📦" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Version:** ${{ steps.version.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Minecraft Version:** $(jq -r '.dependencies.minecraft' modrinth.index.json)" >> $GITHUB_STEP_SUMMARY
+        echo "**Fabric Loader:** $(jq -r '.dependencies."fabric-loader"' modrinth.index.json)" >> $GITHUB_STEP_SUMMARY
+        echo "**Total Mods:** $(jq '.files | length' modrinth.index.json)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Mrpack file created successfully!" >> $GITHUB_STEP_SUMMARY
+        
+        # Show file size
+        FILESIZE=$(ls -lh *.mrpack | awk '{print $5}')
+        echo "**File Size:** $FILESIZE" >> $GITHUB_STEP_SUMMARY

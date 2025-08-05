@@ -1,0 +1,134 @@
+name: Validate Modpack
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Install jq for JSON validation
+      run: sudo apt-get update && sudo apt-get install -y jq
+      
+    - name: Validate modrinth.index.json
+      run: |
+        echo "🔍 Validating modrinth.index.json..."
+        
+        # Check if file exists
+        if [ ! -f "modrinth.index.json" ]; then
+          echo "❌ modrinth.index.json not found!"
+          exit 1
+        fi
+        
+        # Validate JSON syntax
+        if ! jq empty modrinth.index.json 2>/dev/null; then
+          echo "❌ Invalid JSON syntax in modrinth.index.json"
+          exit 1
+        fi
+        
+        echo "✅ modrinth.index.json is valid JSON"
+        
+        # Check required fields
+        if ! jq -e '.dependencies' modrinth.index.json > /dev/null; then
+          echo "❌ Missing 'dependencies' field"
+          exit 1
+        fi
+        
+        if ! jq -e '.files' modrinth.index.json > /dev/null; then
+          echo "❌ Missing 'files' field"
+          exit 1
+        fi
+        
+        echo "✅ Required fields present"
+        
+        # Display stats
+        MINECRAFT_VERSION=$(jq -r '.dependencies.minecraft // "unknown"' modrinth.index.json)
+        FABRIC_VERSION=$(jq -r '.dependencies."fabric-loader" // "unknown"' modrinth.index.json)
+        MOD_COUNT=$(jq '.files | length' modrinth.index.json)
+        
+        echo "📊 Modpack Statistics:"
+        echo "  - Minecraft Version: $MINECRAFT_VERSION"
+        echo "  - Fabric Loader: $FABRIC_VERSION"
+        echo "  - Number of mods: $MOD_COUNT"
+    
+    - name: Validate overrides structure
+      run: |
+        echo "🔍 Validating overrides structure..."
+        
+        if [ ! -d "overrides" ]; then
+          echo "❌ overrides directory not found!"
+          exit 1
+        fi
+        
+        echo "✅ overrides directory exists"
+        
+        # Check for common directories
+        if [ -d "overrides/config" ]; then
+          CONFIG_COUNT=$(find overrides/config -type f | wc -l)
+          echo "📁 Config files: $CONFIG_COUNT"
+        fi
+        
+        if [ -d "overrides/mods" ]; then
+          LOCAL_MODS=$(find overrides/mods -name "*.jar" | wc -l)
+          echo "📦 Local mods: $LOCAL_MODS"
+        fi
+        
+        if [ -d "overrides/shaderpacks" ]; then
+          SHADERS=$(find overrides/shaderpacks -type f | wc -l)
+          echo "🎨 Shader packs: $SHADERS"
+        fi
+        
+        if [ -d "overrides/emotes" ]; then
+          EMOTES=$(find overrides/emotes -name "*.json" | wc -l)
+          echo "😄 Emotes: $EMOTES"
+        fi
+    
+    - name: Check for potential issues
+      run: |
+        echo "🔍 Checking for potential issues..."
+        
+        # Check for duplicate mod files
+        echo "Checking for duplicate mod names..."
+        DUPLICATES=$(jq -r '.files[].path' modrinth.index.json | grep -o '[^/]*\.jar$' | sort | uniq -d)
+        if [ -n "$DUPLICATES" ]; then
+          echo "⚠️  Potential duplicate mods found:"
+          echo "$DUPLICATES"
+        else
+          echo "✅ No duplicate mod names found"
+        fi
+        
+        # Check for disabled mods
+        DISABLED_MODS=$(jq -r '.files[].path' modrinth.index.json | grep '\.disabled$' | wc -l)
+        if [ "$DISABLED_MODS" -gt 0 ]; then
+          echo "ℹ️  Disabled mods: $DISABLED_MODS"
+          jq -r '.files[].path' modrinth.index.json | grep '\.disabled$' | sed 's/^/  - /'
+        fi
+        
+        # Check file sizes (warn if very large)
+        LARGE_FILES=$(jq -r '.files[] | select(.fileSize > 50000000) | "\(.path) (\(.fileSize | . / 1024 / 1024 | floor)MB)"' modrinth.index.json)
+        if [ -n "$LARGE_FILES" ]; then
+          echo "📦 Large files (>50MB):"
+          echo "$LARGE_FILES" | sed 's/^/  - /'
+        fi
+    
+    - name: Generate validation summary
+      run: |
+        echo "## Validation Summary ✅" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Minecraft Version:** $(jq -r '.dependencies.minecraft' modrinth.index.json)" >> $GITHUB_STEP_SUMMARY
+        echo "**Fabric Loader:** $(jq -r '.dependencies."fabric-loader"' modrinth.index.json)" >> $GITHUB_STEP_SUMMARY
+        echo "**Total Mods:** $(jq '.files | length' modrinth.index.json)" >> $GITHUB_STEP_SUMMARY
+        echo "**Disabled Mods:** $(jq -r '.files[].path' modrinth.index.json | grep '\.disabled$' | wc -l)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Structure Validation" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ modrinth.index.json is valid" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ overrides directory exists" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ No critical issues found" >> $GITHUB_STEP_SUMMARY

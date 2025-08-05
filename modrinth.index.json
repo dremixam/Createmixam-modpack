@@ -287,7 +287,7 @@
                 "sha1": "b99f23fb76aad5a944400717e6d71aa011c4d7f7",
                 "sha512": "3213e37fc12205e49f69a6c295c8c3237d8464d63dedbfbac4901892752741d22ebf7e1b40d6683143e70ca158fc95b00c2af177a1263038edce9a46b6cbeb79"
             },
-            "path": "mods/NoChatReports-FABRIC-1.20.1-v2.2.2.jar"
+            "path": "mods/NoChatReports-FABRIC-1.20.1-v2.2.2.jar.disabled"
         },
         {
             "downloads": [
@@ -1217,7 +1217,7 @@
                 "sha1": "561fa88280b3f6e7d716fd592faa4cdabd93eb93",
                 "sha512": "31f7b03463c5f6c827b3476ed4592062cd0e4dd7604b7e7c15d0330c3ba79469a753faf17af3391aac7732fbd9ca9a872433149e0516b14d2d2baa3210ae4463"
             },
-            "path": "mods/fabric-seasons-croptopia-2.2.2-compat-1.0.jar.disabled"
+            "path": "mods/fabric-seasons-croptopia-2.2.2-compat-1.0.jar"
         },
         {
             "downloads": [
@@ -1232,7 +1232,7 @@
                 "sha1": "21d5240e95a5cdda5b33a77f24ab35a3ee4569c8",
                 "sha512": "7f4863057116ab9e0a14af80601ce1ee58186ce34350ddcbf2763a83a8547a139f6f2daac63433d70f804d0314776f8030fc68ef0d2a5707dba606fe00b1ef79"
             },
-            "path": "mods/fabric-seasons-delight-1.3.9-compat-1.0.jar.disabled"
+            "path": "mods/fabric-seasons-delight-1.3.9-compat-1.0.jar"
         },
         {
             "downloads": [
@@ -1428,6 +1428,21 @@
                 "sha512": "7c5a1851f1fc08ae69318e151d07151fabba6cda2a24616c9251e1a4e5b969453e88b97d60f926271d60e3511bfc6fa05a64a108466efb7f29bec4519547e0c9"
             },
             "path": "mods/indium-1.0.36+mc1.20.1.jar"
+        },
+        {
+            "downloads": [
+                "https://cdn.modrinth.com/data/F7wXag4i/versions/iYujfjuN/inventorymanagement-1.3.1%2B1.20.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 511275,
+            "hashes": {
+                "sha1": "0b1d3b2c084a8e8594229d201360262f9e17d3b6",
+                "sha512": "fcafc9bf8aa6c8d033b599acbf21cfb75e7e44e054523d24c18928e3c4135a9fbee5f403043dbb2b84ba9809d4dc67fcfab5fbe3e490a315624370c3cf09e363"
+            },
+            "path": "mods/inventorymanagement-1.3.1+1.20.jar"
         },
         {
             "downloads": [
@@ -2469,5 +2484,5 @@
     "game": "minecraft",
     "name": "Createmixam",
     "summary": "Createmixam is a community-driven modpack built around Create automation, creativity, and cooperation. With a balanced mix of technical, exploration, building, and farming mods, everyone can play their own way.",
-    "versionId": "1.0.15"
+    "versionId": "1.0.16"
 }
