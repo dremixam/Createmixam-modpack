@@ -546,18 +546,18 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/6iTJugQR/versions/E9PbJYi2/amendments-1.20-1.2.19-fabric.jar"
+                "https://cdn.modrinth.com/data/6iTJugQR/versions/gjBYiO12/amendments-1.20-2.0.3-fabric.jar"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 998850,
+            "fileSize": 1235973,
             "hashes": {
-                "sha1": "350a8fb1cd16cbcc2b5d987462a5469a6259326e",
-                "sha512": "df6110b81f49095ab5a1864d937a2ccce7e3ad30185bde94c23b78d5582b9c00b697982add20dc536c97413ea2682092002b29a9d26ae35558ab9f99024b3857"
+                "sha1": "74bf0d3917f6f635228ce230079ecee845410bd2",
+                "sha512": "0787f768ac675ab97f8d662324dce4161408012e6fac098642e5740a316fbad8a202355180957e7cb9093720f5d81d251bd116a6f03b09e2ade32fe33e3d3581"
             },
-            "path": "mods/amendments-1.20-1.2.19-fabric.jar"
+            "path": "mods/amendments-1.20-2.0.3-fabric.jar"
         },
         {
             "downloads": [
@@ -606,18 +606,18 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/MBAkmtvl/versions/wF767h1L/balm-fabric-1.20.1-7.3.33.jar"
+                "https://cdn.modrinth.com/data/MBAkmtvl/versions/bZcdZaMf/balm-fabric-1.20.1-7.3.34.jar"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 613825,
+            "fileSize": 615040,
             "hashes": {
-                "sha1": "63949b0596f9c70d4f151bb82620ffc49c855af0",
-                "sha512": "c76634db0dd53d92d4dfc57f027d4f5e788e59daf84ef475f1ca8ab834e7a63e50d01ef467b579bead0675ac406b16e0c2ed36298e7618cd00b5b73feb6a8b90"
+                "sha1": "f92f73a54fbba1d07d32f128a25a4927a26163e4",
+                "sha512": "0e1ef92ac603b07b751f86ccf19b36eac706419c8e54e8e1d7cc6ce690700e9490dccf2ab5c97e3dbbef56b61e8b0a8abcfafc1ee697b9a251b18e277db0f8a1"
             },
-            "path": "mods/balm-fabric-1.20.1-7.3.33.jar"
+            "path": "mods/balm-fabric-1.20.1-7.3.34.jar"
         },
         {
             "downloads": [
@@ -1075,7 +1075,7 @@
             ],
             "env": {
                 "client": "required",
-                "server": "required"
+                "server": "unsupported"
             },
             "fileSize": 506961,
             "hashes": {
@@ -1135,7 +1135,7 @@
             ],
             "env": {
                 "client": "required",
-                "server": "required"
+                "server": "unsupported"
             },
             "fileSize": 470860,
             "hashes": {
@@ -1480,7 +1480,7 @@
             ],
             "env": {
                 "client": "required",
-                "server": "required"
+                "server": "unsupported"
             },
             "fileSize": 1102879,
             "hashes": {
@@ -1671,18 +1671,18 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/nmDcB62a/versions/Qt5OXLYh/modernfix-fabric-5.24.3%2Bmc1.20.1.jar"
+                "https://cdn.modrinth.com/data/nmDcB62a/versions/PSpecC1r/modernfix-fabric-5.24.4%2Bmc1.20.1.jar"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 533703,
+            "fileSize": 533705,
             "hashes": {
-                "sha1": "4709074c94ed778bb6f8bdf2fe94a426b48bec25",
-                "sha512": "f6f9fccf57eb9806d89a5b5d74dd8c22351dccd367860433b32b1bfd364d8192df086bcca9c885371dea7e2de01ab968e97be5b5974282f40db38b118344150b"
+                "sha1": "3d20fa94c463113a24346ed544f4ca95c54bae8d",
+                "sha512": "f56b3e3761af6031ecd4cab5b3dc143cbd47d97e0a5eb8138bd579bd6c169687d5affa154c71992703ffddb2e99f3e6c3852fb554ee0321467ffc6a8cc301a28"
             },
-            "path": "mods/modernfix-fabric-5.24.3+mc1.20.1.jar"
+            "path": "mods/modernfix-fabric-5.24.4+mc1.20.1.jar"
         },
         {
             "downloads": [
@@ -1716,18 +1716,18 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/twkfQtEc/versions/rqF4KPYL/moonlight-1.20-2.14.14-fabric.jar"
+                "https://cdn.modrinth.com/data/twkfQtEc/versions/igJFcN94/moonlight-1.20-2.15.6-fabric.jar"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 1250425,
+            "fileSize": 1264362,
             "hashes": {
-                "sha1": "4eadcb1751187a8690f5e9fe01aa3be61df2815d",
-                "sha512": "3aa7385631a42f18d0d687f087f09fbe68ac4ab8f5a404e716c17dda27dd400f3a254a6f5243541fd8fd0591ac48597b04537bc49f683c44212ec553d2b684b1"
+                "sha1": "bd35894351127cd19c757af31dee4b2e64a6f16f",
+                "sha512": "b55f326dcdfa5b21ec17e9018a87e0f945d8cfa993d2a96ab0d0e60d21489b9cc0f6058112b111f41d3f97e4eef9d997477dde0056415f30d338271662b3c9e2"
             },
-            "path": "mods/moonlight-1.20-2.14.14-fabric.jar"
+            "path": "mods/moonlight-1.20-2.15.6-fabric.jar"
         },
         {
             "downloads": [
@@ -1840,7 +1840,7 @@
             ],
             "env": {
                 "client": "required",
-                "server": "required"
+                "server": "unsupported"
             },
             "fileSize": 838160,
             "hashes": {
@@ -2016,18 +2016,18 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/iDiIfZLX/versions/KDjEp2Fk/seasonhud-fabric-1.20.1-1.13.6.jar"
+                "https://cdn.modrinth.com/data/iDiIfZLX/versions/CK0A0D75/seasonhud-fabric-1.20.1-1.13.7.jar"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 287467,
+            "fileSize": 287507,
             "hashes": {
-                "sha1": "9c7d0fcd29cf494b4ffbcccd458be402517c689f",
-                "sha512": "8ab8b88695fa397e5947a539e7f6d4c0b964a71f5fee159014c1f4e729a59fc244443f647cadd95f967ad2c7b7bec9641ab79737befadbddfe6f2e9ce9b84c14"
+                "sha1": "1f5e6dbc67f32b3a99a7c53d558bd1b84cc921b8",
+                "sha512": "3524b37f740600448467163762d6e19a724ba50066835db64a46e41ed506a7ab32a08cd36ce1bd5f9f26e9a41749cb75b670f63cf094e22056d772eb958d79ac"
             },
-            "path": "mods/seasonhud-fabric-1.20.1-1.13.6.jar"
+            "path": "mods/seasonhud-fabric-1.20.1-1.13.7.jar"
         },
         {
             "downloads": [
@@ -2121,22 +2121,22 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/9jxwkYQL/versions/9RuXVwa9/sophisticatedcore-1.20.1-1.2.7.7.156.jar"
+                "https://cdn.modrinth.com/data/9jxwkYQL/versions/1LK4mYGo/sophisticatedcore-1.20.1-1.2.7.9.158.jar"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 2857703,
+            "fileSize": 2857820,
             "hashes": {
-                "sha1": "06af06f9c0aa7932748701277eb2fbfd2c776a8c",
-                "sha512": "95ee6e9b99e714a703ac1db02d42c2cfdd973f6437fa2b8cbf93fb286ccb9d23f053ae49bc671cc1ff366538f9a99f644f7857b39158a550b37fff6d055ab4b3"
+                "sha1": "f9f78c9e2eca694ba8982fc01dfe692cb6ed67f4",
+                "sha512": "49311310a635c2236ed878324d93919915575a563a17f4217405904ee2d56f31e9951350e3586b662775581c0027c02ec77b4ab44c912d61fc6b8a8ab53857b1"
             },
-            "path": "mods/sophisticatedcore-1.20.1-1.2.7.7.156.jar"
+            "path": "mods/sophisticatedcore-1.20.1-1.2.7.9.158.jar"
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/iHtpVwJL/versions/EBbOq3Hh/sophisticatedstorage-1.20.1-1.3.5.4.126.jar"
+                "https://cdn.modrinth.com/data/iHtpVwJL/versions/rEirxm6c/sophisticatedstorage-1.20.1-1.3.5.5.128.jar"
             ],
             "env": {
                 "client": "required",
@@ -2144,10 +2144,10 @@
             },
             "fileSize": 1674332,
             "hashes": {
-                "sha1": "9d11e5dc9ef175b9f3e86982eb9e8c1ae40eedf2",
-                "sha512": "28549132872400e33c123e9d7211dec57d71e94f92f6a66114fa71fe65f7e8620cf7ca6b24a5ec37d1fe3d74b17ee9f385d76fbf70ea3f4000000c9876cd0422"
+                "sha1": "c4de5a2b1b3f8bf1328635ed20c88f92842a352d",
+                "sha512": "58405bb5745d5f82f969a066c1738690629cb6ab34aaa2bd31b63370a783c25bb077aed653e880ba7675f8e6376fbe2dec1cbf6610d00eac0972f278bf3951c3"
             },
-            "path": "mods/sophisticatedstorage-1.20.1-1.3.5.4.126.jar"
+            "path": "mods/sophisticatedstorage-1.20.1-1.3.5.5.128.jar"
         },
         {
             "downloads": [
@@ -2155,7 +2155,7 @@
             ],
             "env": {
                 "client": "required",
-                "server": "required"
+                "server": "unsupported"
             },
             "fileSize": 203126,
             "hashes": {
@@ -2256,18 +2256,18 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/lWDHr9jE/versions/WuoE1fPj/tectonic-3.0.4-fabric-1.20.1.jar"
+                "https://cdn.modrinth.com/data/lWDHr9jE/versions/tomgxTjS/tectonic-3.0.6-fabric-1.20.1.jar"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 293068,
+            "fileSize": 293095,
             "hashes": {
-                "sha1": "a92e81f99eb78974f3423134882cd8c8f20a536e",
-                "sha512": "0a860335cee2087e23bfebc2f87b5089831fdd1e396088df7d0a34a9906ef04ae9772c9fa09d5a77aecb37699e0b35c70c56fea19697419b8569b74a003c137d"
+                "sha1": "d14cabef6e33e55ae469b514181769f8060a4ed7",
+                "sha512": "13073543d3cebf0090ab5e66f3d63a506f1783a3251c4f7dc0650409a8599b47685702dcfcfff03de792463a588a377328c86410646466daaaf47052b7a7d8c8"
             },
-            "path": "mods/tectonic-3.0.4-fabric-1.20.1.jar"
+            "path": "mods/tectonic-3.0.6-fabric-1.20.1.jar"
         },
         {
             "downloads": [
@@ -2484,5 +2484,5 @@
     "game": "minecraft",
     "name": "Createmixam",
     "summary": "Createmixam is a community-driven modpack built around Create automation, creativity, and cooperation. With a balanced mix of technical, exploration, building, and farming mods, everyone can play their own way.",
-    "versionId": "1.1.3"
+    "versionId": "1.1.4"
 }
