@@ -62,10 +62,15 @@ New-Item -ItemType Directory -Path $TempDir -Force | Out-Null
 Copy-Item "modrinth.index.json" $TempDir
 Copy-Item "overrides" $TempDir -Recurse
 
-# Création de l'archive
+# Création de l'archive (store-only, sans compression)
 try {
     Add-Type -AssemblyName System.IO.Compression.FileSystem
-    [System.IO.Compression.ZipFile]::CreateFromDirectory((Get-Item $TempDir).FullName, (Join-Path $PWD $OutputFile))
+    [System.IO.Compression.ZipFile]::CreateFromDirectory(
+        (Get-Item $TempDir).FullName,
+        (Join-Path $PWD $OutputFile),
+        [System.IO.Compression.CompressionLevel]::NoCompression,
+        $false
+    )
 }
 catch {
     Write-Host "❌ Failed to create ZIP archive: $($_.Exception.Message)" -ForegroundColor Red

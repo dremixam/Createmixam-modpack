@@ -64,7 +64,7 @@ cp -r overrides "$TEMP_DIR/"
 
 # Création de l'archive
 cd "$TEMP_DIR"
-zip -r "../$OUTPUT_FILE" * >/dev/null
+zip -r -0 -X "../$OUTPUT_FILE" * >/dev/null
 cd ..
 
 # Nettoyage

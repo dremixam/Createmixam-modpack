@@ -39,9 +39,9 @@ jobs:
         cp modrinth.index.json mrpack-temp/
         cp -r overrides mrpack-temp/
         
-        # Create the mrpack file (which is just a ZIP with .mrpack extension)
+        # Create the mrpack file (ZIP with store-only compression to reduce entropy)
         cd mrpack-temp
-        zip -r "../Createmixam.mrpack" *
+        zip -r -0 -X "../Createmixam.mrpack" *
         cd ..
         
         # Clean up temporary directory
