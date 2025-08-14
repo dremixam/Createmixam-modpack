@@ -531,18 +531,18 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/6iTJugQR/versions/E9PbJYi2/amendments-1.20-1.2.19-fabric.jar"
+                "https://cdn.modrinth.com/data/6iTJugQR/versions/zabyMXRZ/amendments-1.20-2.1.1-fabric.jar"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 998850,
+            "fileSize": 1243563,
             "hashes": {
-                "sha1": "350a8fb1cd16cbcc2b5d987462a5469a6259326e",
-                "sha512": "df6110b81f49095ab5a1864d937a2ccce7e3ad30185bde94c23b78d5582b9c00b697982add20dc536c97413ea2682092002b29a9d26ae35558ab9f99024b3857"
+                "sha1": "45d93fb365f2acf6441a72d56ae974f9b8339bc3",
+                "sha512": "5c06ccf4519969a346be2f452a7befc948cb02618c5e76e9858eded31867437ecafe893949679949c443aafdc5c9a004590d1dceab6914476555323078b15d8c"
             },
-            "path": "mods/amendments-1.20-1.2.19-fabric.jar"
+            "path": "mods/amendments-1.20-2.1.1-fabric.jar"
         },
         {
             "downloads": [
