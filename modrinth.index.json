@@ -1095,7 +1095,7 @@
             "fileSize": 194411,
             "hashes": {
                 "sha1": "01318840819fbd5525c58b211a32ad39445d3af4",
-                "sha512": "sha256:be146fe13507ccb97af052d517cdf7c275948808ee6f9887b01ff132b7d4e9ba696f2546bdb0d3f37f91686ad140ab889131020f46131d82145a3e83d82f6d74"
+                "sha512": "be146fe13507ccb97af052d517cdf7c275948808ee6f9887b01ff132b7d4e9ba696f2546bdb0d3f37f91686ad140ab889131020f46131d82145a3e83d82f6d74"
             },
             "path": "mods/EmoteTweaks-4.0.6-SNAPSHOT.jar"
         },
