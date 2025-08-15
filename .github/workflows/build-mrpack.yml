@@ -86,7 +86,8 @@ jobs:
           # Request an upload URL for large files (>32MB)
           UPLOAD_URL=$(curl -s --request GET \
             --url https://www.virustotal.com/api/v3/files/upload_url \
-            --header "x-apikey: $VT_API_KEY" | jq -r '.data')
+            --header "x-apikey: $VT_API_KEY" \
+            --header "accept: application/json" | jq -r '.data')
 
           if [ -z "$UPLOAD_URL" ] || [ "$UPLOAD_URL" = "null" ]; then
             echo "Failed to get VirusTotal upload URL." >&2
@@ -95,11 +96,14 @@ jobs:
 
           RESP=$(curl -s --request POST \
             --url "$UPLOAD_URL" \
+            --header "x-apikey: $VT_API_KEY" \
+            --header "accept: application/json" \
             --form "file=@$FILE")
         else
           RESP=$(curl -s --request POST \
             --url https://www.virustotal.com/api/v3/files \
             --header "x-apikey: $VT_API_KEY" \
+            --header "accept: application/json" \
             --form "file=@$FILE")
         fi
 
@@ -114,7 +118,8 @@ jobs:
         for i in {1..30}; do
           ARESP=$(curl -s --request GET \
             --url "https://www.virustotal.com/api/v3/analyses/$ANALYSIS_ID" \
-            --header "x-apikey: $VT_API_KEY")
+            --header "x-apikey: $VT_API_KEY" \
+            --header "accept: application/json")
           STATUS=$(echo "$ARESP" | jq -r '.data.attributes.status')
           echo "Status: $STATUS"
           if [ "$STATUS" = "completed" ]; then
@@ -132,7 +137,8 @@ jobs:
         # Fetch summary results
         FRESP=$(curl -s --request GET \
           --url "https://www.virustotal.com/api/v3/files/$FILE_SHA256" \
-          --header "x-apikey: $VT_API_KEY")
+          --header "x-apikey: $VT_API_KEY" \
+          --header "accept: application/json")
 
         MALICIOUS=$(echo "$FRESP" | jq -r '.data.attributes.last_analysis_stats.malicious')
         SUSPICIOUS=$(echo "$FRESP" | jq -r '.data.attributes.last_analysis_stats.suspicious')
