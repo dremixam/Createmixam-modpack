@@ -2436,18 +2436,33 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/50dA9Sha/versions/8vtPih5h/FreshAnimations_v1.9.2.zip"
+                "https://cdn.modrinth.com/data/R7AmfT2N/versions/qqrLsJ3T/EmoteBend.zip"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 516256,
+            "fileSize": 11190,
             "hashes": {
-                "sha1": "ff18e6a762b87d7e8bad0726ac7d9c153306c6d2",
-                "sha512": "97a387112a5a94b0e7f4d0d2439977a9f28579303ad883ed3d0fcc3277357f8b3ab2418960f698d1a5f435903e0b2f82716fc92f8500cac090f900b2d2135dcf"
+                "sha1": "8b38e2312ee4f87cfaf223de763abf6ed441bb46",
+                "sha512": "b0e4c8d06fda42a2d1aecb1d311d5715fb7a56159c7f6cf9053c58585893d7f6bbbfe3a3be36d33eff2a2951d6c73d55c127e82d08fe828d6e5e888e152bac21"
             },
-            "path": "resourcepacks/FreshAnimations_v1.9.2.zip"
+            "path": "resourcepacks/EmoteBend.zip"
+        },
+        {
+            "downloads": [
+                "https://cdn.modrinth.com/data/Qc9LVmyQ/versions/yefwDDmc/Mine%20Emotes%20translations%20v6.18.zip"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 2054199,
+            "hashes": {
+                "sha1": "7324e14bdfb3584ae5916acc1e3273658d09f15e",
+                "sha512": "aea52e6786e6dc99c2474108a6c735c5dcb67ebd1bdb18336912afa5ff7735fcbaa8c641644f5df41fe3a29accbff632db0491bc182040f2ca35bbad7bba949f"
+            },
+            "path": "resourcepacks/Mine Emotes translations v6.18.zip"
         },
         {
             "downloads": [

@@ -1,4 +1,4 @@
-resourcePacks:["vanilla","fabric","file/ComputerCreate.zip","file/SodiumTranslations.zip"]
+resourcePacks:["vanilla","fabric","file/ComputerCreate.zip","file/SodiumTranslations.zip","Moonlight Mods Dynamic Assets","seasons:seasonal_lush_caves","file/Mine Emotes translations v6.18.zip","file/EmoteBend.zip"]
 lang:fr_fr
 key_key.attack:key.mouse.left
 key_key.use:key.mouse.right
