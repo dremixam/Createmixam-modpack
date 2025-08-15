@@ -65,10 +65,12 @@ jobs:
         echo "REPORT_URL=" >> $GITHUB_OUTPUT
         echo "ANALYSIS_SUMMARY=" >> $GITHUB_OUTPUT
 
-        if [ -z "$VT_API_KEY" ]; then
+        # Robust check for missing/blank API key
+        if [ -z "$VT_API_KEY" ] || [ -z "${VT_API_KEY//[[:space:]]/}" ]; then
           echo "VT_API_KEY not set, skipping VirusTotal scan. Add it in repository Secrets." >&2
           exit 0
         fi
+        echo "VT API key detected (length: ${#VT_API_KEY})."
 
         FILE=$(ls -1 *.mrpack | head -n 1)
         if [ -z "$FILE" ]; then
@@ -84,7 +86,7 @@ jobs:
           # Request an upload URL for large files (>32MB)
           UPLOAD_URL=$(curl -s --request GET \
             --url https://www.virustotal.com/api/v3/files/upload_url \
-            --header "X-Apikey: $VT_API_KEY" | jq -r '.data')
+            --header "x-apikey: $VT_API_KEY" | jq -r '.data')
 
           if [ -z "$UPLOAD_URL" ] || [ "$UPLOAD_URL" = "null" ]; then
             echo "Failed to get VirusTotal upload URL." >&2
@@ -97,7 +99,7 @@ jobs:
         else
           RESP=$(curl -s --request POST \
             --url https://www.virustotal.com/api/v3/files \
-            --header "X-Apikey: $VT_API_KEY" \
+            --header "x-apikey: $VT_API_KEY" \
             --form "file=@$FILE")
         fi
 
@@ -112,7 +114,7 @@ jobs:
         for i in {1..30}; do
           ARESP=$(curl -s --request GET \
             --url "https://www.virustotal.com/api/v3/analyses/$ANALYSIS_ID" \
-            --header "X-Apikey: $VT_API_KEY")
+            --header "x-apikey: $VT_API_KEY")
           STATUS=$(echo "$ARESP" | jq -r '.data.attributes.status')
           echo "Status: $STATUS"
           if [ "$STATUS" = "completed" ]; then
@@ -130,7 +132,7 @@ jobs:
         # Fetch summary results
         FRESP=$(curl -s --request GET \
           --url "https://www.virustotal.com/api/v3/files/$FILE_SHA256" \
-          --header "X-Apikey: $VT_API_KEY")
+          --header "x-apikey: $VT_API_KEY")
 
         MALICIOUS=$(echo "$FRESP" | jq -r '.data.attributes.last_analysis_stats.malicious')
         SUSPICIOUS=$(echo "$FRESP" | jq -r '.data.attributes.last_analysis_stats.suspicious')
