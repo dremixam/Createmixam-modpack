@@ -2207,6 +2207,21 @@
                 "sha1": "023a11c8934d3146947a82fcd055aa5ed8e1dc82",
                 "sha512": "347fb60f95aafab5808fbddac48dd97258cf234b13ccb905885a479f8fd6c9d3481a3020e2e3b548435a4f976a34d4c92ab6958b5839ad3e891ea94d5a543e36"
             },
+            "path": "mods/stevesrealisticsleep-fabric-1.11.2+mc1.20-1.20.1.jar"
+        },
+        {
+            "downloads": [
+                "https://cdn.modrinth.com/data/ZPywkPEo/versions/W6XWL7Sh/stevesrealisticsleep-fabric-1.11.2%2Bmc1.20-1.20.1.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 354986,
+            "hashes": {
+                "sha1": "023a11c8934d3146947a82fcd055aa5ed8e1dc82",
+                "sha512": "347fb60f95aafab5808fbddac48dd97258cf234b13ccb905885a479f8fd6c9d3481a3020e2e3b548435a4f976a34d4c92ab6958b5839ad3e891ea94d5a543e36"
+            },
             "path": "mods/stevesrealisticsleep-fabric-1.11.2+mc1.20-1.20.1.jar.disabled"
         },
         {
