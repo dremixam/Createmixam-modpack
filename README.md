@@ -1,6 +1,7 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/dremixam/Createmixam-modpack/build-mrpack.yml)
 ![GitHub Release Date](https://img.shields.io/github/release-date/dremixam/Createmixam-modpack)
 [![Discord](https://discordapp.com/api/guilds/745755550180048906/widget.png?style=shield)](https://discord.dremixam.com)
+[![Twitch Status](https://img.shields.io/twitch/status/dremixam)](https://twitch.tv/dremixam)
 
 # Createmixam Modpack
 
