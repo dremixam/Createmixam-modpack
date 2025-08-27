@@ -201,6 +201,21 @@
         },
         {
             "downloads": [
+                "https://github.com/dremixam/EmoteTweaks/releases/download/v4.0.6.9999/EmoteTweaks-4.0.6-SNAPSHOT.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 194411,
+            "hashes": {
+                "sha1": "01318840819fbd5525c58b211a32ad39445d3af4",
+                "sha512": "be146fe13507ccb97af052d517cdf7c275948808ee6f9887b01ff132b7d4e9ba696f2546bdb0d3f37f91686ad140ab889131020f46131d82145a3e83d82f6d74"
+            },
+            "path": "mods/EmoteTweaks-4.0.6-SNAPSHOT.jar"
+        },
+        {
+            "downloads": [
                 "https://cdn.modrinth.com/data/7vxePowz/versions/PB4pwRax/FarmersDelight-1.20.1-2.4.0%2Brefabricated.jar"
             ],
             "env": {
@@ -933,6 +948,21 @@
                 "sha512": "5e12cc2ac7aec827a06fb9358fa53a25040428ae0f192a96305b129b084073154a6ae862d6875f6a02fe89a7a11d253049ce90b292f4c4ab2c72a9c94b93c9b0"
             },
             "path": "mods/chipped-fabric-1.20.1-3.0.7.jar"
+        },
+        {
+            "downloads": [
+                "https://cdn.modrinth.com/data/IwCkru1D/versions/KgsqJnsN/cicada-lib-0.14.2%2B1.20.1.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "optional"
+            },
+            "fileSize": 387659,
+            "hashes": {
+                "sha1": "71c8909eb3718cbdcc1b36bf77b37e2241c226d0",
+                "sha512": "6f0129b8aa048336901ccffeedd34502d8fd133089e3e333104052ecdc6c5786ad613ef54ffbdf525d383f8b94a9bdfa205f23c3beeafd634280c8fbdc4bb770"
+            },
+            "path": "mods/cicada-lib-0.14.2+1.20.1.jar"
         },
         {
             "downloads": [
@@ -1683,6 +1713,21 @@
                 "sha512": "bcc479e8564dddb032e187e1eb169ff02575c2924c41a2572d8877dc3c1b063448aeefe8374432ec971a2868e73832af463411845e4c0d2f271e4e98e4631189"
             },
             "path": "mods/lambdynamiclights-4.1.4+1.20.1.jar"
+        },
+        {
+            "downloads": [
+                "https://cdn.modrinth.com/data/D5h9NKNI/versions/nJIAf9uL/lavender-0.1.9%2B1.20.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 523368,
+            "hashes": {
+                "sha1": "5803e3bc8ff760967475f0839bd4c66888f514a8",
+                "sha512": "4387b7d2934c8d420fb5cba7570f9a9475322c864e47022f57398dbc184dd19a4f3d1471ae9728299b46eb5ad6001957e03baec88072c20fa4051ebf5774d748"
+            },
+            "path": "mods/lavender-0.1.9+1.20.jar"
         },
         {
             "downloads": [
@@ -2529,7 +2574,7 @@
                 "https://cdn.modrinth.com/data/Gx7SDgwQ/versions/TQ1tPR5u/toms_storage_creatified-0.2.0.jar"
             ],
             "env": {
-                "client": "optional",
+                "client": "required",
                 "server": "required"
             },
             "fileSize": 15805,
