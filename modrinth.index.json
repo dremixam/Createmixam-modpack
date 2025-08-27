@@ -891,21 +891,6 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/DOUdJVEm/versions/gYWWawgz/controlify-2.1.2%2B1.20.1-fabric.jar"
-            ],
-            "env": {
-                "client": "required",
-                "server": "required"
-            },
-            "fileSize": 4193587,
-            "hashes": {
-                "sha1": "2e2f232d366583fcc0576d23d3d17127655a1df1",
-                "sha512": "0e239c6622957479a9f59266dc2295950698403e25e01f33192b038cab5c9e2d2985bc76fa0d13351116b6a6e93d8791756996cd32221f4a01fbb6d7b7133403"
-            },
-            "path": "mods/controlify-2.1.2+1.20.1-fabric.jar.disabled"
-        },
-        {
-            "downloads": [
                 "https://cdn.modrinth.com/data/iDyqnQLT/versions/6r3KQJqu/coolrain-1.2.0-1.20.1.jar"
             ],
             "env": {
@@ -934,12 +919,18 @@
             },
             "path": "mods/coroutil-fabric-1.20.1-1.3.7.jar"
         },
+        {
+            "downloads": [
+                "https://cdn.modrinth.com/data/DMu0oBKf/versions/9y4MPSVS/craftingtweaks-fabric-1.20.1-18.2.6.jar"
+            ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
             "fileSize": 227987,
             "hashes": {
+                "sha1": "7454cf1cb789ef2eb8c52a2ef65621ad808a24e9",
+                "sha512": "fffa15589b106b83af4d1f615cce499c16d202eb880ba68543fbad6a80ab0c5cb56c9e4937622ffdfcd4f570068127c5476d38055de53bc6dda87b398ebaad87"
             },
             "path": "mods/craftingtweaks-fabric-1.20.1-18.2.6.jar"
         },
