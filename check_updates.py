@@ -124,6 +124,13 @@ def update_file_entry(file_entry, new_version, project_info):
     if not hash_data:
         return False
     
+    # Préserver l'environnement existant mais s'assurer que client est toujours 'required'
+    if 'env' not in file_entry:
+        file_entry['env'] = {}
+    
+    # Toujours marquer comme required côté client
+    file_entry['env']['client'] = 'required'
+    
     # Mettre à jour l'entrée
     file_entry['downloads'] = [primary_file['url']]
     file_entry['fileSize'] = hash_data['size']

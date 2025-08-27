@@ -128,12 +128,8 @@ def create_file_entry(version_data, project_info):
     client_side = project_info.get('client_side', 'optional')
     
     env = {}
-    if client_side == 'required':
-        env['client'] = 'required'
-    elif client_side == 'optional':
-        env['client'] = 'optional'
-    else:
-        env['client'] = 'unsupported'
+    # Toujours marquer comme required côté client
+    env['client'] = 'required'
         
     if server_side == 'required':
         env['server'] = 'required'

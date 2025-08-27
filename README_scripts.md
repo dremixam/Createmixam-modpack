@@ -1,6 +1,6 @@
 # Scripts de gestion des mods Modrinth
 
-Ce dossier contient deux scripts Python pour gérer les mods dans votre modpack Modrinth.
+Ce dossier contient des scripts Python pour gérer les mods dans votre modpack Modrinth et générer des versions serveur.
 
 ## Installation des dépendances
 
@@ -81,25 +81,64 @@ python check_updates.py --interactive
 - ✅ Calcule automatiquement les nouveaux hashes
 - ✅ Sauvegarde automatique du fichier modifié
 
+## 3. generate_server.py - Générer un serveur et des notes de version
+
+Compare l'état actuel avec le dernier tag git et génère un dossier serveur avec les mods compatibles.
+
+### Usage
+```bash
+python generate_server.py
+```
+
+### Fonctionnalités
+- ✅ Compare automatiquement avec le dernier tag git
+- ✅ Génère un dossier `_server/` avec les mods serveur
+- ✅ Télécharge uniquement les mods compatibles côté serveur
+- ✅ Crée des notes de version détaillées (PATCHNOTES.md)
+- ✅ Détecte les mods ajoutés, supprimés et mis à jour
+- ✅ Inclut les commits depuis le dernier tag
+- ✅ Vérifie les hashes SHA1 des fichiers téléchargés
+
+### Contenu généré
+```
+_server/
+├── mods/                # Mods compatibles serveur (.jar)
+├── PATCHNOTES.md       # Notes de version détaillées
+└── README.md           # Instructions d'installation
+```
+
+### Notes de version automatiques
+- Informations techniques (Minecraft, Fabric Loader, nombre de mods)
+- Liste des mods ajoutés avec descriptions
+- Liste des mods supprimés
+- Liste des mods mis à jour avec numéros de version
+- Historique des commits git
+
 ## Exemples d'utilisation
 
-### Ajouter plusieurs mods
+### Workflow complet
 ```bash
+# Ajouter plusieurs mods
 python add_mod.py https://modrinth.com/mod/sodium
 python add_mod.py https://modrinth.com/mod/lithium  
 python add_mod.py https://modrinth.com/mod/phosphor
-```
 
-### Vérifier et mettre à jour
-```bash
-# Voir ce qui peut être mis à jour
-python check_updates.py
-
-# Tout mettre à jour d'un coup
+# Vérifier et mettre à jour
 python check_updates.py --auto-update
 
-# Choisir interactivement
-python check_updates.py --interactive
+# Générer la version serveur et les notes
+python generate_server.py
+```
+
+### Utilisation avec git
+```bash
+# Après avoir fait des changements
+git add .
+git commit -m "Ajout de nouveaux mods"
+git tag v1.2.0
+
+# Générer le serveur pour cette version
+python generate_server.py
 ```
 
 ## Notes importantes
@@ -116,8 +155,13 @@ python check_updates.py --interactive
 ├── modrinth.index.json  # Fichier du modpack
 ├── add_mod.py          # Script d'ajout de mods
 ├── check_updates.py    # Script de mise à jour
+├── generate_server.py  # Script de génération serveur
 ├── requirements.txt    # Dépendances Python
 ├── venv/               # Environnement virtuel (optionnel)
+├── _server/            # Dossier généré (dans .gitignore)
+│   ├── mods/           # Mods serveur
+│   ├── PATCHNOTES.md   # Notes de version
+│   └── README.md       # Documentation serveur
 └── README_scripts.md   # Ce fichier
 ```
 

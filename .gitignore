@@ -32,3 +32,6 @@ local-build/
 # System files
 .env
 .env.local
+
+# Generated server folder
+_server/
