@@ -1,3 +1,5 @@
+# [Télécharger la dernière version](https://github.com/dremixam/Createmixam-modpack/releases/latest/download/Createmixam.mrpack)
+
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/dremixam/Createmixam-modpack/build-mrpack.yml)
 ![GitHub Release Date](https://img.shields.io/github/release-date/dremixam/Createmixam-modpack)
 [![Discord](https://discordapp.com/api/guilds/745755550180048906/widget.png?style=shield)](https://discord.dremixam.com)
