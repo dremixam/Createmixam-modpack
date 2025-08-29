@@ -7,7 +7,9 @@
 
 # Createmixam Modpack
 
-Ce modpack Minecraft Fabric pour la version 1.20.1 est centré sur Create et ses addons. Il est conçu pour être utilisé avec Prism Launcher.
+Ce modpack Minecraft Fabric pour la version 1.20.1 met l’accent sur l’automatisation (Create), l’agriculture et la cuisine (Farmer’s Delight), ainsi que l’exploration (nouveaux biomes, animaux, etc.).
+
+Conçu pour un serveur où entraide, découverte et diversité des styles de jeu sont encouragées : que tu aimes automatiser, explorer, cultiver, builder ou simplement jouer à ton rythme, chacun·e y trouvera sa place.
 
 ## Installation avec Prism Launcher (méthode recommandée)
 
