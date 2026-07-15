@@ -79,6 +79,40 @@ def get_version_from_url(versions, current_url):
                 return version
     return None
 
+def get_latest_fabric_version(minecraft_version):
+    """Récupère la version de Fabric Loader stable la plus récente pour la version MC"""
+    url = f"https://meta.fabricmc.net/v2/versions/loader/{minecraft_version}"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        loaders = response.json()
+        if not loaders:
+            return None
+        # Trouver le premier loader stable
+        for item in loaders:
+            loader_info = item.get('loader', {})
+            if loader_info.get('stable') is True:
+                return loader_info.get('version')
+        # Repli sur le premier (le plus récent) si aucun stable n'est marqué
+        return loaders[0].get('loader', {}).get('version')
+    except Exception as e:
+        print(f"Erreur lors de la récupération de la version Fabric: {e}")
+        return None
+
+def is_newer_version(current, latest):
+    """Vérifie si la version 'latest' est plus récente que 'current'"""
+    def to_tuple(v):
+        parts = re.split(r'[.+|-]', v)
+        res = []
+        for p in parts:
+            try:
+                res.append(int(p))
+            except ValueError:
+                pass
+        return tuple(res)
+    return to_tuple(latest) > to_tuple(current)
+
+
 def download_file_hash(url):
     """Télécharge un fichier et calcule ses hashes"""
     try:
@@ -152,6 +186,29 @@ def check_updates(auto_update=False):
     print(f"🔍 Vérification des mises à jour pour Minecraft {minecraft_version} avec {loader}")
     print("=" * 60)
     
+    # Vérification de Fabric Loader
+    current_fabric = modpack_data['dependencies'].get('fabric-loader')
+    latest_fabric = get_latest_fabric_version(minecraft_version)
+    fabric_update_available = False
+    fabric_updated = False
+    
+    if current_fabric and latest_fabric and is_newer_version(current_fabric, latest_fabric):
+        fabric_update_available = True
+        print(f"📦 Fabric Loader :")
+        print(f"   🆕 Mise à jour disponible!")
+        print(f"      Actuelle: {current_fabric}")
+        print(f"      Nouvelle: {latest_fabric}")
+        
+        if auto_update:
+            print(f"   🔄 Mise à jour automatique de Fabric Loader en cours...")
+            modpack_data['dependencies']['fabric-loader'] = latest_fabric
+            fabric_updated = True
+            print(f"   ✅ Fabric Loader mis à jour!")
+        print("-" * 60)
+    elif current_fabric:
+        print(f"📦 Fabric Loader : ✅ À jour ({current_fabric})")
+        print("-" * 60)
+    
     updates_available = []
     updates_applied = []
     
@@ -218,27 +275,32 @@ def check_updates(auto_update=False):
     
     print("=" * 60)
     
-    if updates_available:
-        print(f"📊 Résumé: {len(updates_available)} mise(s) à jour disponible(s)")
+    total_available = len(updates_available) + (1 if fabric_update_available else 0)
+    if total_available > 0:
+        print(f"📊 Résumé: {total_available} mise(s) à jour disponible(s)")
         
         if auto_update:
-            if updates_applied:
+            if updates_applied or fabric_updated:
                 # Trier les fichiers par path (ordre ASCII : majuscules avant minuscules)
                 modpack_data['files'].sort(key=lambda x: x.get('path', ''))
                 
                 if save_modpack_index(modpack_data):
-                    print(f"💾 {len(updates_applied)} mise(s) à jour appliquée(s) et sauvegardée(s)")
+                    total_applied = len(updates_applied) + (1 if fabric_updated else 0)
+                    print(f"💾 {total_applied} mise(s) à jour appliquée(s) et sauvegardée(s)")
                 else:
                     print("❌ Erreur lors de la sauvegarde")
             else:
                 print("❌ Aucune mise à jour n'a pu être appliquée")
         else:
-            print("\n🔧 Pour appliquer les mises à jour, relancez avec --auto-update")
+            print("\n🔧 Pour appliquer les mises à jour, relancez avec --auto-update ou utilisez le mode interactif --interactive")
             print("   Ou mettez à jour manuellement:")
+            if fabric_update_available:
+                print(f"   - Fabric Loader: {current_fabric} → {latest_fabric}")
             for update in updates_available:
                 print(f"   - {update['project_name']}: {update['current_version']} → {update['latest_version']}")
     else:
-        print("✅ Tous les mods sont à jour!")
+        print("✅ Tout est à jour (Fabric Loader et mods) !")
+
 
 def interactive_update():
     """Mode interactif pour choisir quelles mises à jour appliquer"""
@@ -252,7 +314,33 @@ def interactive_update():
     print(f"🔍 Vérification des mises à jour pour Minecraft {minecraft_version} avec {loader}")
     print("=" * 60)
     
+    # Vérification de Fabric Loader
+    current_fabric = modpack_data['dependencies'].get('fabric-loader')
+    latest_fabric = get_latest_fabric_version(minecraft_version)
+    fabric_update_available = False
+    
+    if current_fabric and latest_fabric and is_newer_version(current_fabric, latest_fabric):
+        fabric_update_available = True
+        print(f"📦 Fabric Loader :")
+        print(f"   🆕 Mise à jour disponible!")
+        print(f"      Actuelle: {current_fabric}")
+        print(f"      Nouvelle: {latest_fabric}")
+        print("-" * 60)
+    elif current_fabric:
+        print(f"📦 Fabric Loader : ✅ À jour ({current_fabric})")
+        print("-" * 60)
+    
     updates_available = []
+    
+    if fabric_update_available:
+        updates_available.append({
+            'is_fabric': True,
+            'project_name': 'Fabric Loader (Dépendance)',
+            'current_version': current_fabric,
+            'latest_version': latest_fabric,
+            'current_date': 'N/A',
+            'latest_date': 'N/A'
+        })
     
     for i, file_entry in enumerate(modpack_data['files']):
         if not file_entry.get('downloads'):
@@ -303,7 +391,7 @@ def interactive_update():
     print("=" * 60)
     
     if not updates_available:
-        print("✅ Tous les mods sont à jour!")
+        print("✅ Tout est à jour (Fabric Loader et mods) !")
         return
     
     print(f"📊 {len(updates_available)} mise(s) à jour disponible(s):")
@@ -350,12 +438,18 @@ def interactive_update():
     
     success_count = 0
     for update in updates_to_apply:
-        print(f"   📦 {update['project_name']}...")
-        if update_file_entry(update['file_entry'], update['new_version'], update['project_info']):
+        if update.get('is_fabric'):
+            print(f"   📦 Fabric Loader...")
+            modpack_data['dependencies']['fabric-loader'] = update['latest_version']
             success_count += 1
-            print(f"   ✅ {update['project_name']} mis à jour!")
+            print(f"   ✅ Fabric Loader mis à jour!")
         else:
-            print(f"   ❌ Échec pour {update['project_name']}")
+            print(f"   📦 {update['project_name']}...")
+            if update_file_entry(update['file_entry'], update['new_version'], update['project_info']):
+                success_count += 1
+                print(f"   ✅ {update['project_name']} mis à jour!")
+            else:
+                print(f"   ❌ Échec pour {update['project_name']}")
     
     if success_count > 0:
         # Trier les fichiers par path (ordre ASCII : majuscules avant minuscules)
@@ -367,6 +461,7 @@ def interactive_update():
             print("\n❌ Erreur lors de la sauvegarde")
     else:
         print("\n❌ Aucune mise à jour n'a pu être appliquée")
+
 
 def main():
     if len(sys.argv) > 1:
