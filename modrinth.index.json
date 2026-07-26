@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "fabric-loader": "0.19.2",
+        "fabric-loader": "0.19.3",
         "minecraft": "1.20.1"
     },
     "files": [
@@ -3111,48 +3111,48 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/Qc9LVmyQ/versions/yefwDDmc/Mine%20Emotes%20translations%20v6.18.zip"
+                "https://cdn.modrinth.com/data/Qc9LVmyQ/versions/S6N0uuZN/Mine%20Emotes%20translations%20v7.2.zip"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 2054199,
+            "fileSize": 2054753,
             "hashes": {
-                "sha1": "7324e14bdfb3584ae5916acc1e3273658d09f15e",
-                "sha512": "aea52e6786e6dc99c2474108a6c735c5dcb67ebd1bdb18336912afa5ff7735fcbaa8c641644f5df41fe3a29accbff632db0491bc182040f2ca35bbad7bba949f"
+                "sha1": "8aa9a71c57ad4422c04258e26d5312093c86e09f",
+                "sha512": "971d6efe111ecba1b0968e729ed49079260726b98e6008a068fcb8e03ccf082bc18108901a3ba5a1eb9f0c548a56322bad338d3895b1b50aa229bf068ef64213"
             },
-            "path": "resourcepacks/Mine Emotes translations v6.18.zip"
+            "path": "resourcepacks/Mine Emotes translations v7.2.zip"
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/yfDziwn1/versions/9fQQ7TYI/SodiumTranslations.zip"
+                "https://cdn.modrinth.com/data/yfDziwn1/versions/r7AZ0jmT/SodiumTranslations.zip"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 227073,
+            "fileSize": 271788,
             "hashes": {
-                "sha1": "d6da5a8d4db78c84bf031e1e38401406dc3edd0c",
-                "sha512": "2df6ede3a1b93ebaae7ba8d7309308a12ecc52a34c1c8722dc996b9751a73cda515d3a30132c89b356578df272948f33ebb90e2fb282d774a9ddb1b2668fb367"
+                "sha1": "0e7f852ce0d1333a0dc1434d9055e5f9cd8b777d",
+                "sha512": "97905b43324f0189c4cc9f1dc47fab0d6f2c6da07ca2a780826a4a743aa1343219c4336d234bc439026fd265eed401f8319ba2c2fb82f352d309b4267149d775"
             },
             "path": "resourcepacks/SodiumTranslations.zip"
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/HVnmMxH1/versions/sAAjYvFB/ComplementaryReimagined_r5.5.1.zip"
+                "https://cdn.modrinth.com/data/HVnmMxH1/versions/yCCduG44/ComplementaryReimagined_r5.8.1.zip"
             ],
             "env": {
                 "client": "required",
                 "server": "required"
             },
-            "fileSize": 456328,
+            "fileSize": 546925,
             "hashes": {
-                "sha1": "c9f1724fbe77e1d36afab9612b4aaac693bc84e4",
-                "sha512": "e3168c3e8b9a59e70dbc7dd27931d8b245e5b16b093c87f1dccd01edc3a8be0fb14153fe8175e822ea6463ac0d715de377d186455580915c6f9d98c02b39194f"
+                "sha1": "5a021081f0178ed91dd911194071465ab0a4348b",
+                "sha512": "6bd95215755d25812556ce790d976221f7d677d63112e3e4d3e70b08a62ed41348fa3792dd31bbe720d1e46fe2d525cadb4f66e6358118e1f4aa8e0d11f25c39"
             },
-            "path": "shaderpacks/ComplementaryReimagined_r5.5.1.zip"
+            "path": "shaderpacks/ComplementaryReimagined_r5.8.1.zip"
         }
     ],
     "formatVersion": 1,

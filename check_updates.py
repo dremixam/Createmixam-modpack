@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Script pour vérifier les mises à jour des mods dans modrinth.index.json
-Usage: python check_updates.py [--auto-update]
+Usage: python check_updates.py [--auto-update] [--interactive]
 """
 
 import json
@@ -47,9 +47,11 @@ def get_project_versions(project_id, minecraft_version, loader):
     """Récupère toutes les versions compatibles d'un projet"""
     url = f"https://api.modrinth.com/v2/project/{project_id}/version"
     params = {
-        'game_versions': f'["{minecraft_version}"]',
-        'loaders': f'["{loader}"]'
+        'game_versions': f'["{minecraft_version}"]'
     }
+    
+    if loader:
+        params['loaders'] = f'["{loader}"]'
     
     try:
         response = requests.get(url, params=params)
@@ -166,11 +168,12 @@ def update_file_entry(file_entry, new_version, project_info):
     file_entry['env']['client'] = 'required'
     
     # Mettre à jour l'entrée
+    current_dir = file_entry['path'].split('/')[0] if '/' in file_entry['path'] else 'mods'
     file_entry['downloads'] = [primary_file['url']]
     file_entry['fileSize'] = hash_data['size']
     file_entry['hashes']['sha1'] = hash_data['sha1']
     file_entry['hashes']['sha512'] = hash_data['sha512']
-    file_entry['path'] = f"mods/{primary_file['filename']}"
+    file_entry['path'] = f"{current_dir}/{primary_file['filename']}"
     
     return True
 
@@ -231,7 +234,10 @@ def check_updates(auto_update=False):
         print(f"📦 Vérification de {project_name}...")
         
         # Récupérer toutes les versions compatibles
-        versions = get_project_versions(project_id, minecraft_version, loader)
+        path = file_entry.get('path', '')
+        item_loader = None if (path.startswith('resourcepacks/') or path.startswith('shaderpacks/')) else loader
+
+        versions = get_project_versions(project_id, minecraft_version, item_loader)
         if not versions:
             print(f"   ⚠️  Aucune version compatible trouvée")
             continue
@@ -359,7 +365,10 @@ def interactive_update():
         project_name = project_info['title']
         print(f"📦 Vérification de {project_name}...")
         
-        versions = get_project_versions(project_id, minecraft_version, loader)
+        path = file_entry.get('path', '')
+        item_loader = None if (path.startswith('resourcepacks/') or path.startswith('shaderpacks/')) else loader
+
+        versions = get_project_versions(project_id, minecraft_version, item_loader)
         if not versions:
             print(f"   ⚠️  Aucune version compatible trouvée")
             continue
