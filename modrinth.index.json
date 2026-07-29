@@ -21,6 +21,21 @@
         },
         {
             "downloads": [
+                "https://cdn.modrinth.com/data/rhj2L1Jf/versions/mGefcZnC/Almanac-0.6.1.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 43054,
+            "hashes": {
+                "sha1": "4ac9f6f0b0580f7565ef00f3c94047881a722139",
+                "sha512": "be255f64ca731a0b6781b432a07899e86bfe4bc84e2079168cf42b4b6f34bf29b286578924d75771720ebffa27d2ec8c7a2ae2e87a361c9b432ee3bb3f3531a9"
+            },
+            "path": "mods/Almanac-0.6.1.jar"
+        },
+        {
+            "downloads": [
                 "https://cdn.modrinth.com/data/fM515JnW/versions/cAyLWFYE/AmbientSounds_FABRIC_v6.3.8_mc1.20.1.jar"
             ],
             "env": {
@@ -639,7 +654,7 @@
                 "https://cdn.modrinth.com/data/JJ3q7W2X/versions/OavhxgV0/Voiceless%20Survival%201.20.1-0.8.6.jar"
             ],
             "env": {
-                "client": "required",
+                "client": "unsupported",
                 "server": "required"
             },
             "fileSize": 47605,
@@ -753,6 +768,21 @@
                 "sha512": "e55d49348a9d944bbd19390c64a4f42a1375eaaf0cbd4d69b4f523e441d9d23ce9498c912db724260cde32a43b776832cb867161e0989995d974de7e19e12389"
             },
             "path": "mods/athena-fabric-1.20.1-3.1.2.jar"
+        },
+        {
+            "downloads": [
+                "https://cdn.modrinth.com/data/SRlzjEBS/versions/M6EFtrdy/audioplayer-fabric-1.20.1-1.13.2.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 781487,
+            "hashes": {
+                "sha1": "12a1bef12dc6c6d231cd05b14afd6c4fd459dc92",
+                "sha512": "2012f04a9fc8092df4f6ac43a38dd1b463c40d8b90ecebaae3412b3d9d99b9fad5297657b729f69bb016270a0741475abb4ee3b41d9aed17107cdfa3873b6fb7"
+            },
+            "path": "mods/audioplayer-fabric-1.20.1-1.13.2.jar"
         },
         {
             "downloads": [
@@ -2706,6 +2736,36 @@
         },
         {
             "downloads": [
+                "https://cdn.modrinth.com/data/EdBSdqge/versions/aHHKkRuW/spyglass_astronomy-1.0.15-mc1.20.1.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "unsupported"
+            },
+            "fileSize": 279469,
+            "hashes": {
+                "sha1": "812fd26feff8a2329711841a1ade7074d5a95882",
+                "sha512": "842ee2b8115a721cabc1eabaeed7f2bd0eacbd6e3c8405a95d945448cd8e7fbd34e8cb1e33f454c512dd20a3b19efb0278164f3ebf952e7d558ccac7b6f697a5"
+            },
+            "path": "mods/spyglass_astronomy-1.0.15-mc1.20.1.jar"
+        },
+        {
+            "downloads": [
+                "https://cdn.modrinth.com/data/Z6ykjRlM/versions/ySttssF3/spyglass_improvements-fabric-1.5.12%2Bmc1.20%2Bfabric.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "unsupported"
+            },
+            "fileSize": 61977,
+            "hashes": {
+                "sha1": "a733fdfad6f58651b6d73de65c174fae93d76f30",
+                "sha512": "7827b68c4de28be6cf7a69915a03e2324bee5ffeedea8704588e8a94d11199c3b2f0526deedaf0e6d3016f21455382a6d1948b140f252158b002c9e050b26a9f"
+            },
+            "path": "mods/spyglass_improvements-fabric-1.5.12+mc1.20+fabric.jar"
+        },
+        {
+            "downloads": [
                 "https://cdn.modrinth.com/data/b93awgkg/versions/GUpw0Opx/status-fabric-1.20.1-1.0.8.jar"
             ],
             "env": {
@@ -2886,6 +2946,21 @@
         },
         {
             "downloads": [
+                "https://cdn.modrinth.com/data/74oZhrEe/versions/z3JgD6i1/trmt-0.5.1-1.20.1-fabric.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 128041,
+            "hashes": {
+                "sha1": "c85bd52edf7756c858c379443de357cdd3fdfe3d",
+                "sha512": "d699c54f7313e01e18b419918f29e2ebd43d06dafa5d1958ec14eb3db650df91050463e69726c2c766273fb2029a796cdd80da8f8248f64bcf5e282bfe8a86a0"
+            },
+            "path": "mods/trmt-0.5.1-1.20.1-fabric.jar"
+        },
+        {
+            "downloads": [
                 "https://cdn.modrinth.com/data/fdZkP5Bb/versions/TguS2qGT/vanilla-permissions-0.3.5%2B1.20.1.jar"
             ],
             "env": {
@@ -2898,6 +2973,21 @@
                 "sha512": "b16ed20b6e64f0ff8231847a4169014d064a00cf8d3bec25c0272c29e814ef61fb325938d930ff45b9a834eaa3dc89745e47880e98112b706e4c99098e812c43"
             },
             "path": "mods/vanilla-permissions-0.3.5+1.20.1.jar"
+        },
+        {
+            "downloads": [
+                "https://cdn.modrinth.com/data/qsSP2ZZ0/versions/LX0uNyw4/vcinteraction-fabric-1.20.1-1.0.6.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 404186,
+            "hashes": {
+                "sha1": "f730f28d2978e9fc0e240d8182295732d49a1e10",
+                "sha512": "aaf799e4a0ab02f907538b5afb762b161d581904d98d41e9dc166005eab89dc5b0a489b5fe29c12f7e2285daec7ba2329711a7104a6a2d712d3a9fb25a0aaaf8"
+            },
+            "path": "mods/vcinteraction-fabric-1.20.1-1.0.6.jar"
         },
         {
             "downloads": [
@@ -3159,5 +3249,5 @@
     "game": "minecraft",
     "name": "Createmixam",
     "summary": "Createmixam is a community-driven modpack built around Create automation, creativity, and cooperation. With a balanced mix of technical, exploration, building, and farming mods, everyone can play their own way.",
-    "versionId": "2.0.0-alpha1"
+    "versionId": "2.0.0-alpha2"
 }
