@@ -2226,6 +2226,21 @@
         },
         {
             "downloads": [
+                "https://cdn.modrinth.com/data/7vLeZs9H/versions/u79Vxouj/nirvana-fabric-1.2.5.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 5753806,
+            "hashes": {
+                "sha1": "8e2092f034b9774aafdd188e5790182e103ed291",
+                "sha512": "ddf0c12746f1f54c7d4e131b7895d8a4278185e7d47eb05d09c32f79cc6c76c1994c7ac730cdf4124bfa3b0cc0fd422933efa67c7bb5ed21f66a85346a6a3c95"
+            },
+            "path": "mods/nirvana-fabric-1.2.5.jar"
+        },
+        {
+            "downloads": [
                 "https://cdn.modrinth.com/data/Y0sQ2EA8/versions/GTSUkAAb/no-more-naturalist-cooked-egg-%28farmers-delight-compat%29-1.1.jar"
             ],
             "env": {
