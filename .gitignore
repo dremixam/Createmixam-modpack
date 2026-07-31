@@ -20,7 +20,6 @@ Thumbs.db
 *.bak
 
 # Archives and compressed files (except the final mrpack)
-*.zip
 *.rar
 *.7z
 *.tar.gz

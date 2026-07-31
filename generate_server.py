@@ -47,6 +47,36 @@ def get_previous_tag():
         return run_git_command('git describe --tags --abbrev=0 HEAD~1', silent_errors=True)
     return run_git_command('git describe --tags --abbrev=0', silent_errors=True)
 
+def debug_git_state():
+    """Affiche un résumé très détaillé de l'état Git pour comprendre le problème de tag"""
+    print("\n" + "="*50)
+    print("🔍 DIAGNOSTIC GIT DETAILLE")
+    print("="*50)
+    
+    current_commit = run_git_command('git rev-parse HEAD')
+    current_tag = get_current_tag()
+    previous_tag = get_previous_tag()
+    
+    print(f"📌 Commit actuel (HEAD)     : {current_commit}")
+    print(f"📌 Tag sur HEAD (actuel)     : {current_tag or 'Aucun (Pas de tag sur ce commit exact)'}")
+    print(f"📌 Tag trouvé via HEAD~1     : {run_git_command('git describe --tags --abbrev=0 HEAD~1', silent_errors=True)}")
+    print(f"📌 Tag retourné comme 'prev' : {previous_tag}")
+    
+    print("\n📋 5 derniers tags créés dans l'historique :")
+    tags_list = run_git_command('git tag --sort=-creatordate')
+    if tags_list:
+        for t in tags_list.split('\n')[:5]:
+            t_commit = run_git_command(f'git rev-parse {t}')
+            print(f"  - {t} (commit: {t_commit})")
+            
+    print("\n📜 5 derniers commits (avec leurs tags associés) :")
+    commits_log = run_git_command('git log --oneline --decorate -n 5')
+    if commits_log:
+        for line in commits_log.split('\n'):
+            print(f"  {line}")
+            
+    print("="*50 + "\n")
+
 def get_commits_since_tag(tag):
     """Récupère les commits depuis le dernier tag"""
     if not tag:
@@ -179,28 +209,20 @@ def extract_version_from_filename(filename):
     return None
 
 def normalize_mod_name(filename):
-    """
-    Nettoie le nom de fichier pour extraire la véritable racine du mod.
-    Gère les variantes comme fabric, forge, mc versions, etc.
-    Ex: 'entity_model_features_fabric_1.20.1-2.4.1.jar.disabled' -> 'entity_model_features'
-    Ex: 'entity_model_features-3.2.4-1.20.1-fabric.jar' -> 'entity_model_features'
-    """
     name = filename.replace('.disabled', '').replace('.jar', '').lower()
-    # Enlever les mots clés courants du nom
     name = re.sub(r'[-_](fabric|forge|neoforge|quilt|mc\d+[\d\.]*|1\.\d+[\d\.]*)', '', name)
-    # Couper au premier numéro de version trouvé
     match = re.match(r'^([a-z0-9]+(?:[-_][a-z]+)*)', name)
     if match:
         clean = match.group(1).strip('-_')
-        # Si ça finit par fabric/forge après nettoyage, on le retire aussi
         clean = re.sub(r'[-_](fabric|forge|neoforge|quilt)$', '', clean)
         return clean
     return name
 
-def generate_patch_notes(changes, old_modpack, new_modpack, previous_tag, commits):
+def generate_patch_notes(changes, old_modpack, new_modpack, current_tag, previous_tag, commits):
     notes = []
-    current_version = get_current_tag() or "Unreleased"
-    notes.append(f"# Patch Notes - {current_version}")
+    # On utilise le tag passé en paramètre (ou 'Unreleased' si aucun)
+    version_display = current_tag or "Unreleased"
+    notes.append(f"# Patch Notes - {version_display}")
     notes.append(f"*Généré le {datetime.now().strftime('%d/%m/%Y à %H:%M')}*")
     notes.append("")
     
@@ -269,19 +291,15 @@ def generate_patch_notes(changes, old_modpack, new_modpack, previous_tag, commit
     return '\n'.join(notes)
 
 def get_mod_slug_or_base(project_id, filename):
-    """Récupère le slug Modrinth officiel du projet, ou nettoie le nom de fichier si indisponible"""
     if project_id:
         info = get_project_info(project_id)
         if info and 'slug' in info:
-            # ex: 'entity-model-features' -> 'entitymodelfeatures' pour comparaison facile
             return info['slug'].replace('-', '').replace('_', '').lower()
     
-    # Fallback si pas d'API
     clean = filename.replace('.disabled', '').replace('.jar', '').lower()
     return clean.split('-')[0].split('_')[0]
 
 def deploy_to_sftp(changes, mods_dir):
-    """Déploie la mise à jour sur le serveur via SFTP avec identification stricte par Slug Modrinth"""
     import getpass
     print("\n🌐 Connexion au serveur SFTP...")
     
@@ -310,14 +328,12 @@ def deploy_to_sftp(changes, mods_dir):
 
     warnings = []
 
-    # 1. Supprimer les mods retirés du pack
     for project_id, file_entry in changes['removed']:
         filename = get_filename_from_path(file_entry.get('path', ''))
         slug = get_mod_slug_or_base(project_id, filename)
         
         found = False
         for r_file in remote_files:
-            # On vérifie si le fichier distant contient le slug du mod
             clean_r = r_file.replace('-', '').replace('_', '').lower()
             if slug in clean_r:
                 print(f"🗑️ [SFTP] Suppression du mod retiré : {r_file}")
@@ -327,17 +343,12 @@ def deploy_to_sftp(changes, mods_dir):
         if not found:
             warnings.append(f"Mod retiré du modpack mais introuvable sur le SFTP : '{filename}'")
 
-    # Re-lister les fichiers après suppression
     remote_files = sftp.listdir(remote_dir)
-
-    # 2. Préparer la carte des mises à jour (Project_ID -> Anciens fichiers)
     updated_project_ids = {project_id: old_file for project_id, old_file, new_file in changes['updated']}
 
-    # 3. Upload et remplacement des mods locaux
     local_mods = list(mods_dir.glob('*.jar'))
     print(f"📤 Synchronisation de {len(local_mods)} mods vers le serveur...")
 
-    # On charge l'index actuel pour faire le lien entre fichier local (.jar) et project_id Modrinth
     current_pack = load_current_modpack() or {}
     file_to_project = {}
     for f in current_pack.get('files', []):
@@ -354,7 +365,6 @@ def deploy_to_sftp(changes, mods_dir):
         is_disabled = False
         matching_remote_files = []
 
-        # Identifier les fichiers distants qui appartiennent à ce mod
         for r_file in remote_files:
             clean_r = r_file.replace('-', '').replace('_', '').lower()
             if slug in clean_r:
@@ -362,17 +372,14 @@ def deploy_to_sftp(changes, mods_dir):
                 if r_file.endswith('.disabled'):
                     is_disabled = True
 
-        # Alerte si c'est une mise à jour enregistrée mais qu'on ne trouve aucun fichier sur le serveur
         if project_id in updated_project_ids and not matching_remote_files:
             old_fn = get_filename_from_path(updated_project_ids[project_id].get('path', ''))
             warnings.append(f"Mod mis à jour ({local_mod.name}) mais l'ancienne version ('{old_fn}') est introuvable sur le serveur SFTP.")
 
-        # Supprimer les anciennes versions distantes
         for r_file in matching_remote_files:
             print(f"🧹 Suppression de l'ancienne version distante : {r_file}")
             sftp.remove(f"{remote_dir}/{r_file}")
 
-        # Conserver le statut .disabled si l'ancienne version l'était sur le serveur
         target_name = f"{local_mod.name}.disabled" if is_disabled else local_mod.name
         remote_path = f"{remote_dir}/{target_name}"
 
@@ -393,6 +400,10 @@ def deploy_to_sftp(changes, mods_dir):
 
 def generate_server_folder():
     print("🔍 Génération du dossier serveur...")
+    
+    # Exécution du diagnostic complet
+    debug_git_state()
+
     server_dir = Path('_server')
     if server_dir.exists():
         shutil.rmtree(server_dir)
@@ -405,14 +416,35 @@ def generate_server_folder():
     if not current_modpack:
         return False
     
+    current_tag = get_current_tag()
     previous_tag = get_previous_tag()
-    old_modpack = load_modpack_from_commit(previous_tag) if previous_tag else None
+    
+    ref_to_load = previous_tag or "HEAD~1"
+    print(f"🔎 Chargement de l'ancien modpack depuis le tag/commit : '{ref_to_load}'")
+    old_modpack = load_modpack_from_commit(ref_to_load)
+    
+    if old_modpack is None and previous_tag:
+        print(f"⚠️ ATTENTION : Impossible de lire 'modrinth.index.json' au commit/tag '{previous_tag}' !")
     
     changes = compare_modpacks(old_modpack, current_modpack)
+    print(f"📊 Changements détectés : {len(changes['added'])} ajoutés, {len(changes['removed'])} supprimés, {len(changes['updated'])} mis à jour")
+
     commits = get_commits_since_tag(previous_tag)
     
-    patch_notes = generate_patch_notes(changes, old_modpack, current_modpack, previous_tag, commits)
+    # Appel corrigé avec les 6 arguments dans le bon ordre
+    patch_notes = generate_patch_notes(
+        changes, 
+        old_modpack, 
+        current_modpack, 
+        current_tag, 
+        previous_tag, 
+        commits
+    )
+    
+    # Écriture dans _server/PATCHNOTES.md et à la racine
     with open(server_dir / 'PATCHNOTES.md', 'w', encoding='utf-8') as f:
+        f.write(patch_notes)
+    with open('PATCHNOTES.md', 'w', encoding='utf-8') as f:
         f.write(patch_notes)
     
     changed_mods = []
@@ -427,11 +459,17 @@ def generate_server_folder():
         print("✅ Tous les mods serveur sont déjà à jour !")
     else:
         for i, file_entry in enumerate(changed_mods, 1):
-            if not file_entry.get('downloads'): continue
+            if not file_entry.get('downloads'): 
+                continue
             filename = get_filename_from_path(file_entry.get('path', ''))
             destination = mods_dir / filename
             print(f"📥 [{i}/{len(changed_mods)}] {filename}")
             download_file(file_entry['downloads'][0], destination)
+
+    # Copie du dossier config s'il existe
+    if os.path.exists("config"):
+        print("📁 Copie du dossier config...")
+        shutil.copytree("config", server_dir / "config", dirs_exist_ok=True)
 
     answer = input("\n🚀 Veux-tu déployer les changements directement sur le serveur via SFTP ? (o/N) : ")
     if answer.lower() in ['o', 'oui', 'y', 'yes']:
