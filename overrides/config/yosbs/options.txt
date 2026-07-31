@@ -36,6 +36,7 @@ key_key.hotbar.8:key.keyboard.8
 key_key.hotbar.9:key.keyboard.9
 key_key.emotecraft.fastchoose:key.keyboard.b
 key_key.emotecraft.stop:key.keyboard.unknown
+key_key.ad_astra.toggle_suit_flight:key.keyboard.unknown
 key_bedrockIfy.key.settings:key.keyboard.b
 key_keybinds.bettercombat.feint:key.keyboard.unknown
 key_keybinds.bettercombat.toggle_mine_with_weapons:key.keyboard.unknown
@@ -71,6 +72,7 @@ key_key.jade.toggle_liquid:key.keyboard.keypad.2
 key_key.jade.narrate:key.keyboard.keypad.5
 key_key.jade.show_details_alternative:key.keyboard.unknown
 key_key.modmenu.open_menu:key.keyboard.unknown
+key_supplementaries.keybind.quiver:key.keyboard.unknown
 key_physicsmod.keybinding.guiphysics:key.keyboard.f6
 key_physicsmod.keybinding.physicsmenu:key.keyboard.f7
 key_physicsmod.keybinding.togglephysics:key.keyboard.unknown
