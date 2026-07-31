@@ -3243,21 +3243,6 @@
                 "sha512": "97905b43324f0189c4cc9f1dc47fab0d6f2c6da07ca2a780826a4a743aa1343219c4336d234bc439026fd265eed401f8319ba2c2fb82f352d309b4267149d775"
             },
             "path": "resourcepacks/SodiumTranslations.zip"
-        },
-        {
-            "downloads": [
-                "https://cdn.modrinth.com/data/HVnmMxH1/versions/yCCduG44/ComplementaryReimagined_r5.8.1.zip"
-            ],
-            "env": {
-                "client": "required",
-                "server": "required"
-            },
-            "fileSize": 546925,
-            "hashes": {
-                "sha1": "5a021081f0178ed91dd911194071465ab0a4348b",
-                "sha512": "6bd95215755d25812556ce790d976221f7d677d63112e3e4d3e70b08a62ed41348fa3792dd31bbe720d1e46fe2d525cadb4f66e6358118e1f4aa8e0d11f25c39"
-            },
-            "path": "shaderpacks/ComplementaryReimagined_r5.8.1.zip"
         }
     ],
     "formatVersion": 1,
