@@ -247,12 +247,15 @@ Conçu pour un serveur où entraide, découverte et diversité des styles de jeu
 - [oωo](https://modrinth.com/mod/ccKDOlHs) [0\.11\.2\+1\.20] by glisco, BasiqueEvangelist, Noaaan
 - [spark](https://modrinth.com/mod/l6YH9Als) [1\.10\.53] by Luck
 
+## Shaderpack
+- [Complementary Reimagined + Euphoria Patches + Ad Astra Patches](https://github.com/fmauNeko/euphoria_adastra_patcher) by fmauNeko
+
 ## Remerciements
 
 Merci à :
 * Woozzy pour l'aide pour mettre à jour le modpack en v2
 * enimaloc pour l'aide concernant les recettes et les tests linux
-* fmauNeko pour la création du shaderpack custom
+* fmauNeko pour la création du [shaderpack custom](https://github.com/fmauNeko/euphoria_adastra_patcher)
 * Norookezi pour la création du launcher custom
 
 Ainsi que toutes les autres personnes impliquées dans l'organisation de Createmixam 2
