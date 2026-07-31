@@ -95,7 +95,7 @@ Conçu pour un serveur où entraide, découverte et diversité des styles de jeu
 - [Cristel Lib](https://modrinth.com/mod/cl223EMc) [1\.1\.5] by Cristelknight999
 - [Cultural Creators](https://modrinth.com/mod/dsR1i0P9) [1\.1\.0] by Flomik
 - [Cultural Delights Fabric](https://modrinth.com/mod/9Gy8sTXS) [1\.0\.5\+1\.20\.1] by MrSterner
-- [Custom recipes](https://dremixam.com) [1\.20] by DrEmixam
+- [Custom recipes](https://github.com/dremixam/CustomRecipes) [1\.20] by DrEmixam & enimaloc
 - [Delightful Creators](https://modrinth.com/mod/jmJ87gsb) [1\.6\-1\.20\.x] by Flomik
 - [Distant Horizons](https://modrinth.com/mod/uCdwusMi) [3\.2\.0\-b] by James Seibel, Leonardo Amato, Cola, coolGi, Ran, Leetom, pshsh
 - [Dynamic Crosshair](https://modrinth.com/mod/ZcR9weSm) [9\.10] by Crendgrim
