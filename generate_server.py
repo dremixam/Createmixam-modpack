@@ -17,7 +17,6 @@ from datetime import datetime
 import paramiko
 from dotenv import load_dotenv
 
-# Charger les variables d'environnement depuis le fichier .env
 load_dotenv()
 
 SFTP_HOST = os.getenv("SFTP_HOST", "")
@@ -27,7 +26,6 @@ SFTP_PASSWORD = os.getenv("SFTP_PASSWORD", "")
 SFTP_MODS_DIR = os.getenv("SFTP_MODS_DIR", "/home/container/mods")
 
 def run_git_command(command, silent_errors=False):
-    """Exécute une commande git et retourne le résultat"""
     try:
         result = subprocess.run(command, shell=True, capture_output=True, text=True, check=True)
         return result.stdout.strip()
@@ -37,18 +35,15 @@ def run_git_command(command, silent_errors=False):
         return None
 
 def get_current_tag():
-    """Récupère le tag exact correspondant à HEAD s'il existe"""
     return run_git_command('git describe --tags --exact-match HEAD', silent_errors=True)
 
 def get_previous_tag():
-    """Récupère le tag précédent"""
     current_tag = get_current_tag()
     if current_tag:
         return run_git_command('git describe --tags --abbrev=0 HEAD~1', silent_errors=True)
     return run_git_command('git describe --tags --abbrev=0', silent_errors=True)
 
 def debug_git_state():
-    """Affiche un résumé très détaillé de l'état Git pour comprendre le problème de tag"""
     print("\n" + "="*50)
     print("🔍 DIAGNOSTIC GIT DETAILLE")
     print("="*50)
@@ -78,13 +73,11 @@ def debug_git_state():
     print("="*50 + "\n")
 
 def get_commits_since_tag(tag):
-    """Récupère les commits depuis le dernier tag"""
     if not tag:
         return run_git_command('git log --oneline')
     return run_git_command(f'git log {tag}..HEAD --oneline')
 
 def load_modpack_from_commit(commit_hash=None):
-    """Charge modrinth.index.json depuis un commit spécifique"""
     try:
         if commit_hash:
             content = run_git_command(f'git show {commit_hash}:modrinth.index.json')
@@ -99,7 +92,6 @@ def load_modpack_from_commit(commit_hash=None):
     return None
 
 def load_current_modpack():
-    """Charge le fichier modrinth.index.json actuel"""
     try:
         with open('modrinth.index.json', 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -108,7 +100,6 @@ def load_current_modpack():
         return None
 
 def extract_project_id_from_url(url):
-    """Extrait l'ID du projet depuis l'URL de téléchargement Modrinth"""
     pattern = r'cdn\.modrinth\.com/data/([^/]+)/versions'
     match = re.search(pattern, url)
     if match:
@@ -116,7 +107,6 @@ def extract_project_id_from_url(url):
     return None
 
 def get_project_info(project_id):
-    """Récupère les infos du projet depuis l'API Modrinth"""
     url = f"https://api.modrinth.com/v2/project/{project_id}"
     try:
         response = requests.get(url)
@@ -126,13 +116,11 @@ def get_project_info(project_id):
         return None
 
 def is_server_compatible(file_entry):
-    """Vérifie si un mod est compatible serveur"""
     env = file_entry.get('env', {})
     server_side = env.get('server', 'optional')
     return server_side in ['required', 'optional']
 
 def download_file(url, destination):
-    """Télécharge un fichier"""
     try:
         response = requests.get(url, stream=True)
         response.raise_for_status()
@@ -147,7 +135,6 @@ def download_file(url, destination):
         return False
 
 def verify_file_hash(file_path, expected_sha1):
-    """Vérifie le hash SHA1 d'un fichier"""
     try:
         sha1_hash = hashlib.sha1()
         with open(file_path, 'rb') as f:
@@ -158,7 +145,6 @@ def verify_file_hash(file_path, expected_sha1):
         return False
 
 def compare_modpacks(old_modpack, new_modpack):
-    """Compare deux versions du modpack et retourne les changements"""
     changes = {'added': [], 'removed': [], 'updated': []}
     if not old_modpack or not new_modpack:
         return changes
@@ -220,7 +206,6 @@ def normalize_mod_name(filename):
 
 def generate_patch_notes(changes, old_modpack, new_modpack, current_tag, previous_tag, commits):
     notes = []
-    # On utilise le tag passé en paramètre (ou 'Unreleased' si aucun)
     version_display = current_tag or "Unreleased"
     notes.append(f"# Patch Notes - {version_display}")
     notes.append(f"*Généré le {datetime.now().strftime('%d/%m/%Y à %H:%M')}*")
@@ -307,7 +292,7 @@ def deploy_to_sftp(changes, mods_dir):
     user = SFTP_USER or input("Utilisateur SFTP: ")
     port = SFTP_PORT
     password = SFTP_PASSWORD or getpass.getpass("Mot de passe SFTP: ")
-    remote_dir = SFTP_MODS_DIR or input("Dossier mods distant: ")
+    remote_mods_dir = SFTP_MODS_DIR or input("Dossier mods distant: ")
 
     try:
         transport = paramiko.Transport((host, port))
@@ -318,10 +303,33 @@ def deploy_to_sftp(changes, mods_dir):
         print(f"❌ Échec de la connexion SFTP: {e}")
         return
 
+    # Synchronisation unique du fichier bcc.json
+    local_bcc = Path("overrides/config/bcc.json")
+    if not local_bcc.exists():
+        local_bcc = Path("config/bcc.json")
+
+    if local_bcc.exists():
+        remote_base = os.path.dirname(remote_mods_dir.rstrip('/'))
+        remote_bcc_path = f"{remote_base}/config/bcc.json"
+        
+        try:
+            sftp.mkdir(f"{remote_base}/config")
+        except IOError:
+            pass
+        
+        print(f"📄 Upload de {local_bcc} vers {remote_bcc_path}...")
+        try:
+            sftp.put(str(local_bcc), remote_bcc_path)
+            print("✅ Fichier bcc.json mis à jour sur le serveur !")
+        except Exception as e:
+            print(f"⚠️ Erreur lors de l'upload de bcc.json: {e}")
+    else:
+        print("⚠️ Aucun fichier bcc.json trouvé localement (overrides/config/bcc.json ou config/bcc.json).")
+
     try:
-        remote_files = sftp.listdir(remote_dir)
+        remote_files = sftp.listdir(remote_mods_dir)
     except Exception as e:
-        print(f"❌ Impossible de lire le dossier distant {remote_dir}: {e}")
+        print(f"❌ Impossible de lire le dossier distant {remote_mods_dir}: {e}")
         sftp.close()
         transport.close()
         return
@@ -337,13 +345,13 @@ def deploy_to_sftp(changes, mods_dir):
             clean_r = r_file.replace('-', '').replace('_', '').lower()
             if slug in clean_r:
                 print(f"🗑️ [SFTP] Suppression du mod retiré : {r_file}")
-                sftp.remove(f"{remote_dir}/{r_file}")
+                sftp.remove(f"{remote_mods_dir}/{r_file}")
                 found = True
         
         if not found:
             warnings.append(f"Mod retiré du modpack mais introuvable sur le SFTP : '{filename}'")
 
-    remote_files = sftp.listdir(remote_dir)
+    remote_files = sftp.listdir(remote_mods_dir)
     updated_project_ids = {project_id: old_file for project_id, old_file, new_file in changes['updated']}
 
     local_mods = list(mods_dir.glob('*.jar'))
@@ -378,10 +386,10 @@ def deploy_to_sftp(changes, mods_dir):
 
         for r_file in matching_remote_files:
             print(f"🧹 Suppression de l'ancienne version distante : {r_file}")
-            sftp.remove(f"{remote_dir}/{r_file}")
+            sftp.remove(f"{remote_mods_dir}/{r_file}")
 
         target_name = f"{local_mod.name}.disabled" if is_disabled else local_mod.name
-        remote_path = f"{remote_dir}/{target_name}"
+        remote_path = f"{remote_mods_dir}/{target_name}"
 
         status_str = "🔒 (.disabled)" if is_disabled else "⚡ (actif)"
         print(f"  ➡️ Upload: {target_name} {status_str}")
@@ -401,7 +409,6 @@ def deploy_to_sftp(changes, mods_dir):
 def generate_server_folder():
     print("🔍 Génération du dossier serveur...")
     
-    # Exécution du diagnostic complet
     debug_git_state()
 
     server_dir = Path('_server')
@@ -431,7 +438,6 @@ def generate_server_folder():
 
     commits = get_commits_since_tag(previous_tag)
     
-    # Appel corrigé avec les 6 arguments dans le bon ordre
     patch_notes = generate_patch_notes(
         changes, 
         old_modpack, 
@@ -441,7 +447,6 @@ def generate_server_folder():
         commits
     )
     
-    # Écriture dans _server/PATCHNOTES.md et à la racine
     with open(server_dir / 'PATCHNOTES.md', 'w', encoding='utf-8') as f:
         f.write(patch_notes)
     with open('PATCHNOTES.md', 'w', encoding='utf-8') as f:
@@ -466,7 +471,6 @@ def generate_server_folder():
             print(f"📥 [{i}/{len(changed_mods)}] {filename}")
             download_file(file_entry['downloads'][0], destination)
 
-    # Copie du dossier config s'il existe
     if os.path.exists("config"):
         print("📁 Copie du dossier config...")
         shutil.copytree("config", server_dir / "config", dirs_exist_ok=True)
