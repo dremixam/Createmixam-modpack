@@ -1401,21 +1401,6 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/rmDY6fYt/versions/zo74Lu4e/delightlib-26.05.18-1.20-fabric.jar"
-            ],
-            "env": {
-                "client": "required",
-                "server": "required"
-            },
-            "fileSize": 4028038,
-            "hashes": {
-                "sha1": "c6189e81068b7544452fa517ebae25841bd98273",
-                "sha512": "e8dd6b8e9b1ccb1a25dfd1fd61ef77f32244fddfb27117afb266e878f3cacb22f0e350e198919737b0bb1b401bd86884952102dad60c7b0d236f288ad1c6a8bc"
-            },
-            "path": "mods/delightlib-26.05.18-1.20-fabric.jar"
-        },
-        {
-            "downloads": [
                 "https://cdn.modrinth.com/data/ZcR9weSm/versions/kiEtbqAW/dynamiccrosshair-9.10%2B1.20.1-fabric.jar"
             ],
             "env": {
