@@ -2571,21 +2571,6 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/jkkNIFjT/versions/nOTlEsGr/simple-copper-pipes-delight-1.0.0.jar"
-            ],
-            "env": {
-                "client": "required",
-                "server": "required"
-            },
-            "fileSize": 12548,
-            "hashes": {
-                "sha1": "677191f5d9f0662abcfb2d550fb9578fdf4e4498",
-                "sha512": "69f406b5eb5ae64bd27d7b2faccab4738fd15418fc7a3934eb4e0aefad53a6152ca50ea4f457ce11c5c1663fdc25f10f845e6199cdb119c6be9a3214931944df"
-            },
-            "path": "mods/simple-copper-pipes-delight-1.0.0.jar"
-        },
-        {
-            "downloads": [
                 "https://cdn.modrinth.com/data/S7b8mMXS/versions/f9TIjf7X/simpleradio-fabric-1.20.1-4.5.7.9.jar"
             ],
             "env": {
@@ -3111,6 +3096,21 @@
         },
         {
             "downloads": [
+                "https://cdn.modrinth.com/data/sk4iFZGy/versions/BHr8OLOk/zRemove_SDL_Intro_v1.2.2.jar"
+            ],
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "fileSize": 12238,
+            "hashes": {
+                "sha1": "c1c3067dc507b045eac4b07995e70b32172ee844",
+                "sha512": "2a5b1f3a074d567c6134b918cd711ad64015cf3db0c1dfaf083f66af56004ae2ecda80e63593e1c20dae99f7237b718efde851e1e85f6e1ba604ba87469f60ff"
+            },
+            "path": "mods/zRemove_SDL_Intro_v1.2.2.jar"
+        },
+        {
+            "downloads": [
                 "https://cdn.modrinth.com/data/w7ThoJFB/versions/PEJt9yRp/zoomify-2.15.2%2B1.20.1.jar"
             ],
             "env": {
@@ -3189,5 +3189,5 @@
     "game": "minecraft",
     "name": "Createmixam",
     "summary": "Createmixam is a community-driven modpack built around Create automation, creativity, and cooperation. With a balanced mix of technical, exploration, building, and farming mods, everyone can play their own way.",
-    "versionId": "2.0.0-alpha2"
+    "versionId": "2.0.5"
 }
