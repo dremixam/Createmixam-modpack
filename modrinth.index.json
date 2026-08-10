@@ -2406,21 +2406,6 @@
         },
         {
             "downloads": [
-                "https://cdn.modrinth.com/data/SrkzlZZ1/versions/8WuA1CEM/pronounmc-fabric-1.0.0-1.20.1.jar"
-            ],
-            "env": {
-                "client": "required",
-                "server": "unsupported"
-            },
-            "fileSize": 457477,
-            "hashes": {
-                "sha1": "ffee0b94b63dd1b7f00f99e9ee2c45d2638d76a3",
-                "sha512": "a6571b884584504a321848688c60fbc82a034b5b87a8cc706631e31db31ca4ce06f38c52efab2432b98adb92809706b36667aa66b70adadce541cc608ac8fce5"
-            },
-            "path": "mods/pronounmc-fabric-1.0.0-1.20.1.jar"
-        },
-        {
-            "downloads": [
                 "https://cdn.modrinth.com/data/AtT9wm5O/versions/2u5N40JW/radiantgear-fabric-2.1.6%2B1.20.1.jar"
             ],
             "env": {
