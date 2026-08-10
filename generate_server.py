@@ -449,8 +449,6 @@ def generate_server_folder():
     
     with open(server_dir / 'PATCHNOTES.md', 'w', encoding='utf-8') as f:
         f.write(patch_notes)
-    with open('PATCHNOTES.md', 'w', encoding='utf-8') as f:
-        f.write(patch_notes)
     
     changed_mods = []
     for project_id, file_entry in changes['added']:
