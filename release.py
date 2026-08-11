@@ -2,6 +2,7 @@
 """
 Script pour publier une nouvelle version du modpack :
 - Met à jour overrides/config/bcc.json
+- Met à jour modrinth.index.json
 - Crée le commit de version
 - Pose le tag Git
 - Pushe le tout sur GitHub (déclenche le workflow .mrpack)
@@ -16,6 +17,7 @@ import sys
 from pathlib import Path
 
 BCC_PATH = Path("overrides/config/bcc.json")
+MODRINTH_PATH = Path("modrinth.index.json")
 
 def run_cmd(command, check=True):
     """Exécute une commande shell et gère les erreurs."""
@@ -29,27 +31,24 @@ def run_cmd(command, check=True):
             sys.exit(1)
         return None
 
-def update_bcc_version(version_str):
-    """Met à jour le champ modpackVersion dans bcc.json."""
-    if not BCC_PATH.exists():
-        print(f"❌ Fichier introuvable : {BCC_PATH}")
-        sys.exit(1)
-
-    # Retire le 'v' initial si fourni (ex: 'v2.0.4' -> '2.0.4')
-    clean_version = version_str.lstrip('v')
+def update_json_file(file_path, key_name, version_str):
+    """Met à jour une clé spécifique dans un fichier JSON."""
+    if not file_path.exists():
+        print(f"⚠️ Fichier introuvable (ignoré) : {file_path}")
+        return False
 
     try:
-        with open(BCC_PATH, "r+", encoding="utf-8") as f:
+        with open(file_path, "r+", encoding="utf-8") as f:
             data = json.load(f)
-            old_version = data.get("modpackVersion", "N/A")
-            data["modpackVersion"] = clean_version
+            old_version = data.get(key_name, "N/A")
+            data[key_name] = version_str
             f.seek(0)
             json.dump(data, f, indent=2)
             f.truncate()
-        print(f"✅ {BCC_PATH} mis à jour : '{old_version}' ➡️ '{clean_version}'")
-        return clean_version
+        print(f"✅ {file_path} mis à jour : '{old_version}' ➡️ '{version_str}'")
+        return True
     except Exception as e:
-        print(f"❌ Erreur lors de la mise à jour de bcc.json : {e}")
+        print(f"❌ Erreur lors de la mise à jour de {file_path} : {e}")
         sys.exit(1)
 
 def main():
@@ -76,14 +75,28 @@ def main():
     tag_name = version_input if version_input.startswith('v') else f"v{version_input}"
     clean_version = version_input.lstrip('v')
 
-    print(f"\n🚀 Préparation de la release {tag_name} (bcc.json: {clean_version})...\n")
+    print(f"\n🚀 Préparation de la release {tag_name} (version: {clean_version})...\n")
 
-    # 3. Mise à jour de bcc.json
-    update_bcc_version(clean_version)
+    # 3. Mise à jour des fichiers de configuration
+    files_to_stage = []
+    
+    # bcc.json utilise la clé 'modpackVersion'
+    if update_json_file(BCC_PATH, "modpackVersion", clean_version):
+        files_to_stage.append(str(BCC_PATH))
+        
+    # modrinth.index.json utilise la clé 'versionId'
+    if update_json_file(MODRINTH_PATH, "versionId", clean_version):
+        files_to_stage.append(str(MODRINTH_PATH))
+
+    if not files_to_stage:
+        print("❌ Aucun fichier n'a pu être mis à jour.")
+        sys.exit(1)
 
     # 4. Commit et Tag Git
-    print("📦 Création du commit et du tag Git...")
-    run_cmd(f'git add "{BCC_PATH}"')
+    print("\n📦 Création du commit et du tag Git...")
+    for file in files_to_stage:
+        run_cmd(f'git add "{file}"')
+        
     run_cmd(f'git commit -m "Release {tag_name}"')
     run_cmd(f'git tag -a {tag_name} -m "Release {tag_name}"')
 
