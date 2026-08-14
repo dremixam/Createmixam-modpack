@@ -1821,6 +1821,21 @@
     },
     {
       "downloads": [
+        "https://cdn.modrinth.com/data/YYrsrQ6q/versions/gdBf9qi7/jeiworldgen-fabric-1.20.1-1.4.1.jar"
+      ],
+      "env": {
+        "client": "required",
+        "server": "optional"
+      },
+      "fileSize": 119333,
+      "hashes": {
+        "sha1": "bdc95f7000ce0f8e89253a7526ecd255d959b436",
+        "sha512": "3709d1e8442e712841944a387639e97a0254e8a97b5d328a728ac22425e90f524e387cec1ec7c400acae0725b0d64276165f752b9fc7e13f43615462de9cd5b8"
+      },
+      "path": "mods/jeiworldgen-fabric-1.20.1-1.4.1.jar"
+    },
+    {
+      "downloads": [
         "https://cdn.modrinth.com/data/XbiLGMMU/versions/1co6rVbw/jupiter-2.3.7-1.20.1-fabric.jar"
       ],
       "env": {
