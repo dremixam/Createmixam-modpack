@@ -2421,18 +2421,18 @@
     },
     {
       "downloads": [
-        "https://cdn.modrinth.com/data/fRIu3HNp/versions/fyvaEN9f/recipe_modification-fabric-1.20.1-0.1.2.jar"
+        "https://cdn.modrinth.com/data/fRIu3HNp/versions/uVzAuXWO/recipe_modification-fabric-1.20.1-0.1.1.jar"
       ],
       "env": {
         "client": "required",
         "server": "required"
       },
-      "fileSize": 55606,
+      "fileSize": 55636,
       "hashes": {
-        "sha1": "5c54e3ad878d2cb249f42b2ceb95a65e1f2f27da",
-        "sha512": "8b9529f5ee0a556186c2c9af346bc48992ac1757f0e178a01de1983641ef2d0c4d04d5fd6d62f1887fc4f7bc2bc26701a3be0956f76ab970a9786219cf073f9e"
+        "sha1": "3ce5c9bb9b4fd53fe0096b2e92eacf7513f59c18",
+        "sha512": "f0627b9f5dade5331a24a819a3023bd74bb67a2139a5f58823d895ea6f071cd5f2277093aa113aa34eb0eb4d9eb4d6d395f044c6a1abb93947bb0004fa3fbc75"
       },
-      "path": "mods/recipe_modification-fabric-1.20.1-0.1.2.jar"
+      "path": "mods/recipe_modification-fabric-1.20.1-0.1.1.jar"
     },
     {
       "downloads": [
